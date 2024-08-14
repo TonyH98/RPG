@@ -1,4 +1,8 @@
+import java.awt.Color;
+
 import javax.swing.JPanel;
+import javax.swing.plaf.DimensionUIResource;
+
 
 public class GamePanel extends JPanel{
 
@@ -17,5 +21,10 @@ final int screenWidth = titleSize * maxScreenCol; //768 pixels
 final int screenHeight = titleSize * maxScreenRow; // 576 pixels;
 
 
+public GamePanel(){
 
+    this.setPreferredSize(new DimensionUIResource(screenWidth, screenHeight));
+    this.setBackground(Color.BLACK);
+    this.setDoubleBuffered(true);
+}
 }
