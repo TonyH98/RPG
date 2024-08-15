@@ -1,3 +1,4 @@
+package Main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -53,7 +54,6 @@ public void run(){
     double drawInterval = 1000000000/fps; //draw the graphics every 0.0166 seconds
 
     double nextDrawTime = System.nanoTime() + drawInterval;
-
 
     while(gameThread != null){
 
