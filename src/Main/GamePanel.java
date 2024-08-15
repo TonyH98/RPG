@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
+import Entity.Player;
+
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -15,7 +17,7 @@ final int originalTitleSize = 16; //16*16 tile default size of characters, title
 
 final int scale = 3; //Scale the pixals 
 
-final int titleSize = originalTitleSize * scale; //48 * 48 tiles 
+public final int titleSize = originalTitleSize * scale; //48 * 48 tiles 
 
 //The max pixels shown on screen
 final int maxScreenCol  = 16; 
@@ -29,6 +31,8 @@ int fps = 60;
 KeyHandler keyH = new KeyHandler();
 
 Thread gameThread;  
+
+Player player = new Player(this, keyH);
 
 int plyayerX = 100; 
 int playerY = 100; 
@@ -87,20 +91,7 @@ public void run(){
 
 public void update(){
 
-    if(keyH.upPressed == true){
-        playerY -= playerSpeed;
-        playerY = playerY - playerSpeed;
-    }
-    else if(keyH.downPressed == true){
-        playerY += playerSpeed;
-
-    }
-    else if(keyH.leftPressed == true){
-        plyayerX -= playerSpeed;
-    }
-    else if(keyH.rightPressed == true){
-        plyayerX += playerSpeed;
-    }
+   player.update();
 
 }
 
@@ -111,10 +102,8 @@ public void paintComponent(Graphics g){
 
     Graphics2D g2 = (Graphics2D)g;
 
-    g2.setColor(Color.white);
-
-    g2.fillRect(plyayerX, playerY, titleSize, titleSize);
-
+    player.draw(g2);
+    
     g2.dispose();
 
 }
