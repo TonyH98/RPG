@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
 import Entity.Player;
+import tile.tileManager;
 
 
 public class GamePanel extends JPanel implements Runnable{
@@ -20,10 +21,10 @@ final int scale = 3; //Scale the pixals
 public final int titleSize = originalTitleSize * scale; //48 * 48 tiles 
 
 //The max pixels shown on screen
-final int maxScreenCol  = 16; 
-final int maxScreenRow = 12;
-final int screenWidth = titleSize * maxScreenCol; //768 pixels
-final int screenHeight = titleSize * maxScreenRow; // 576 pixels;
+public final int maxScreenCol  = 16; 
+public final int maxScreenRow = 12;
+public final int screenWidth = titleSize * maxScreenCol; //768 pixels
+public final int screenHeight = titleSize * maxScreenRow; // 576 pixels;
 
 //fps
 int fps = 60;
@@ -34,9 +35,7 @@ Thread gameThread;
 
 Player player = new Player(this, keyH);
 
-int plyayerX = 100; 
-int playerY = 100; 
-int playerSpeed = 4; 
+tileManager tileM = new tileManager(this);
 
 public GamePanel(){
 
@@ -101,6 +100,8 @@ public void paintComponent(Graphics g){
     super.paintComponent(g); 
 
     Graphics2D g2 = (Graphics2D)g;
+    
+    tileM.draw(g2);
 
     player.draw(g2);
     
