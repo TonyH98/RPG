@@ -26,6 +26,13 @@ public final int maxScreenRow = 12;
 public final int screenWidth = titleSize * maxScreenCol; //768 pixels
 public final int screenHeight = titleSize * maxScreenRow; // 576 pixels;
 
+//World Settings
+public final int maxWorldCol = 50;
+public final int maxWorldRow = 50;
+public final int worldWidth = titleSize * maxWorldCol;
+public final int worldHeight = titleSize * maxScreenRow;
+
+
 //fps
 int fps = 60;
 
@@ -33,7 +40,7 @@ KeyHandler keyH = new KeyHandler();
 
 Thread gameThread;  
 
-Player player = new Player(this, keyH);
+public Player player = new Player(this, keyH);
 
 tileManager tileM = new tileManager(this);
 

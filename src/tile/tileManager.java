@@ -23,10 +23,10 @@ public tileManager(GamePanel gp){
 
     tile = new tile[10];
 
-    mapTileNum = new int [gp.maxScreenCol] [gp.maxScreenRow];
+    mapTileNum = new int [gp.maxWorldCol] [gp.maxWorldRow];
 
     getTitleImage();
-    loadMap("/map/map2.txt");
+    loadMap("/map/world01.txt");
 }
 
 public void getTitleImage(){
@@ -35,10 +35,21 @@ public void getTitleImage(){
 
         tile[0] = new tile();
         tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass.png"));
+
         tile[1] = new tile();
         tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Brick.png"));
+
         tile[2] = new tile();
         tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
+
+        tile[3] = new tile();
+        tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
+
+        tile[4] = new tile();
+        tile[4].image = ImageIO.read(getClass().getResource("/tiles/sand.png"));
+        
+        tile[5] = new tile();
+        tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));
 
     }
     catch(IOException e){
@@ -57,11 +68,11 @@ public void loadMap(String map){
         int col = 0; //represent the col within the text file
         int row = 0; //represents the row within the text file
 
-        while(col < gp.maxScreenCol && row < gp.maxScreenRow){ //Will stop once it reaches the maximum as there will no value to read 
+        while(col < gp.maxWorldCol && row < gp.maxWorldRow){ //Will stop once it reaches the maximum as there will no value to read 
 
             String line = br.readLine();
 
-            while(col < gp.maxScreenCol){
+            while(col < gp.maxWorldCol){
                 String numbers[] = line.split(" ");
 
                 int num = Integer.parseInt(numbers[col]);
@@ -69,7 +80,7 @@ public void loadMap(String map){
                 mapTileNum[col][row] = num;
                 col++;
             }
-            if(col == gp.maxScreenCol){
+            if(col == gp.maxWorldCol){
                 col = 0;
                 row++;
             }
@@ -84,24 +95,35 @@ public void loadMap(String map){
 
 public void draw(Graphics2D g2){
     
-    int col = 0; 
-    int row = 0;
-    int x = 0;
-    int y = 0;
+    int worldCol = 0; 
+    int worldRow = 0;
 
-    while(col < gp.maxScreenCol && row < gp.maxScreenRow){
+    while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow){
 
-        int tileNum = mapTileNum[col][row];
+        int tileNum = mapTileNum[worldCol][worldRow];
 
-        g2.drawImage(tile[tileNum].image, x, y, gp.titleSize, gp.titleSize, null);
-        col++;
-        x += gp.titleSize;
+        int worldX = worldCol * gp.titleSize;
 
-        if(col == gp.maxScreenCol){
-            col = 0;
-            x = 0;
-            row++;
-            y += gp.titleSize;
+        int worldY = worldRow * gp.titleSize;
+
+        int screenX = worldX - gp.player.worldX + gp.player.screenX;
+
+        int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+
+        if(worldX + gp.titleSize > gp.player.worldX - gp.player.screenX && worldX - gp.titleSize < gp.player.worldX + gp.player.screenX 
+        && worldY + gp.titleSize > gp.player.worldY - gp.player.screenY && worldY - gp.titleSize < gp.player.worldY + gp.player.screenY){ //Create a boundry to draw what is necessary
+
+            g2.drawImage(tile[tileNum].image, screenX, screenY, gp.titleSize, gp.titleSize, null);
+        }
+        worldCol++;
+
+
+        if(worldCol == gp.maxWorldCol){
+            worldCol = 0;
+
+            worldRow++;
+  
         }
     }
 
