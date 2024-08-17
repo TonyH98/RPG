@@ -40,9 +40,11 @@ KeyHandler keyH = new KeyHandler();
 
 Thread gameThread;  
 
+public CollisionChecker cChecker = new CollisionChecker(this);
+
 public Player player = new Player(this, keyH);
 
-tileManager tileM = new tileManager(this);
+public tileManager tileM = new tileManager(this);
 
 public GamePanel(){
 

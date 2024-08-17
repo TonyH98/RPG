@@ -1,6 +1,7 @@
 package Entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -28,6 +29,13 @@ public class Player extends Entity{
         screenX = gp.screenWidth / 2 - (gp.titleSize /2);
 
         screenY = gp.screenHeight / 2 - (gp.titleSize /2);
+
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
+
         setDefaultValues();
         getPlayerImage();
     }
@@ -82,7 +90,29 @@ public class Player extends Entity{
                 direction = "right";
                 worldX += actualSpeed;
             }
-    
+            
+            //Check tile collision
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
+            //if collision is flase player can move
+            if(collisionOn == false){
+                switch(direction){
+                    case "up":
+                    worldY -= actualSpeed;
+                    break;
+                    case "down":
+                    worldY += actualSpeed;
+                    break;
+                    case "left":
+                    worldX -= actualSpeed;
+                    break;
+                    case "right":
+                    worldX += actualSpeed;
+                    break;
+                }
+            }
+
             // Handle sprite animation
             spriteCounter++;
             if (spriteCounter > 12) {

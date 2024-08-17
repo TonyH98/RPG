@@ -13,9 +13,9 @@ public class tileManager {
 
 GamePanel gp;
 
-tile[] tile;
+public tile[] tile;
 
-int mapTileNum[][];
+public int mapTileNum[][];
 
 public tileManager(GamePanel gp){
 
@@ -38,12 +38,15 @@ public void getTitleImage(){
 
         tile[1] = new tile();
         tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Brick.png"));
+        tile[1].collison = true;
 
         tile[2] = new tile();
         tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
+        tile[2].collison = true;
 
         tile[3] = new tile();
         tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
+        tile[3].collison = true;
 
         tile[4] = new tile();
         tile[4].image = ImageIO.read(getClass().getResource("/tiles/sand.png"));
