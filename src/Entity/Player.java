@@ -70,49 +70,45 @@ public class Player extends Entity{
         
         if (isMoving) {
             int actualSpeed = speed;
-    
+        
             // Check if sprinting
             if (keyH.sprintPressed) {
                 actualSpeed += 5; // Increase the speed when sprinting
             }
-    
-            // Movement based on direction
+        
+            // Set the direction based on key input
             if (keyH.upPressed) {
                 direction = "up";
-                worldY -= actualSpeed;
             } else if (keyH.downPressed) {
                 direction = "down";
-                worldY += actualSpeed;
             } else if (keyH.leftPressed) {
                 direction = "left";
-                worldX -= actualSpeed;
             } else if (keyH.rightPressed) {
                 direction = "right";
-                worldX += actualSpeed;
             }
-            
-            //Check tile collision
+    
+            // Check tile collision
             collisionOn = false;
-            gp.cChecker.checkTile(this);
-
-            //if collision is flase player can move
-            if(collisionOn == false){
-                switch(direction){
+            gp.checker.checkTile(this);
+    
+            // If collision is false, move the player
+            if (!collisionOn) {
+                switch (direction) {
                     case "up":
-                    worldY -= actualSpeed;
-                    break;
+                        worldY -= actualSpeed;
+                        break;
                     case "down":
-                    worldY += actualSpeed;
-                    break;
+                        worldY += actualSpeed;
+                        break;
                     case "left":
-                    worldX -= actualSpeed;
-                    break;
+                        worldX -= actualSpeed;
+                        break;
                     case "right":
-                    worldX += actualSpeed;
-                    break;
+                        worldX += actualSpeed;
+                        break;
                 }
             }
-
+    
             // Handle sprite animation
             spriteCounter++;
             if (spriteCounter > 12) {
@@ -121,6 +117,7 @@ public class Player extends Entity{
             }
         }
     }
+    
     
 
     public void draw(Graphics2D g2){

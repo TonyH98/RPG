@@ -40,7 +40,7 @@ KeyHandler keyH = new KeyHandler();
 
 Thread gameThread;  
 
-public CollisionChecker cChecker = new CollisionChecker(this);
+public CollisionChecker checker = new CollisionChecker(this);
 
 public Player player = new Player(this, keyH);
 
