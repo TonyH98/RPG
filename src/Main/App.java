@@ -21,6 +21,8 @@ public class App {
 
        window.setVisible(true);
 
+       gamePanel.setUpGame();
+
        gamePanel.startGameThread();
 
     }

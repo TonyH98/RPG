@@ -8,7 +8,7 @@ import javax.swing.plaf.DimensionUIResource;
 
 import Entity.Player;
 import tile.tileManager;
-
+import object.superObject;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -46,6 +46,10 @@ public Player player = new Player(this, keyH);
 
 public tileManager tileM = new tileManager(this);
 
+public AssetSetter assetSetter = new AssetSetter(this);
+
+public superObject object[] = new superObject[10]; //Display only 10 objects at a time;
+
 public GamePanel(){
 
     this.setPreferredSize(new DimensionUIResource(screenWidth, screenHeight));
@@ -53,6 +57,10 @@ public GamePanel(){
     this.setDoubleBuffered(true);
     this.addKeyListener(keyH);
     this.setFocusable(true);
+}
+
+public void setUpGame(){
+    assetSetter.setObject();
 }
 
 public void startGameThread(){
@@ -110,10 +118,21 @@ public void paintComponent(Graphics g){
 
     Graphics2D g2 = (Graphics2D)g;
     
+    //tile
     tileM.draw(g2);
 
+    //Object
+    for(int i = 0 ; i < object.length; i++){
+        if(object[i] != null){
+            object[i].draw(g2, this);
+        }
+    }
+
+    //player
     player.draw(g2);
-    
+
+    player.drawCollisionBox(g2);
+
     g2.dispose();
 
 }

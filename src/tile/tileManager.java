@@ -44,12 +44,12 @@ public void getTitleImage(){
         tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
         tile[2].collison = true;
 
-        tile[3] = new tile();
-        tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
-        tile[3].collison = true;
-
         tile[4] = new tile();
-        tile[4].image = ImageIO.read(getClass().getResource("/tiles/sand.png"));
+        tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
+        tile[4].collison = true;
+
+        tile[3] = new tile();
+        tile[3].image = ImageIO.read(getClass().getResource("/tiles/sand.png"));
         
         tile[5] = new tile();
         tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));

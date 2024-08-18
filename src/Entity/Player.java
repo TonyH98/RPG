@@ -1,5 +1,6 @@
 package Entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -33,12 +34,18 @@ public class Player extends Entity{
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
-        solidArea.width = 32;
-        solidArea.height = 32;
+        solidArea.width = 26;
+        solidArea.height = 28;
 
         setDefaultValues();
         getPlayerImage();
     }
+
+    public void drawCollisionBox(Graphics2D g2) {
+        g2.setColor(Color.RED);
+        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+    }
+    
 
     public void setDefaultValues(){
 
