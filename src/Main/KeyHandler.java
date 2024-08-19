@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed, sprintPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, sprintPressed, objecInteraction;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -32,6 +32,9 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_K){
             sprintPressed = true;
         }
+        if(code == KeyEvent.VK_J){
+            objecInteraction = true;
+        }
 
         
     }
@@ -55,6 +58,9 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_K){
             sprintPressed = false;
+        }
+        if(code == KeyEvent.VK_J){
+            objecInteraction = false;
         }
 
     }

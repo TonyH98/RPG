@@ -139,13 +139,18 @@ public class Player extends Entity{
 
             switch(objectName){
                 case "Key":
-                hashKey++;
-                gp.object[index] = null;
+                if(keyH.objecInteraction){
+                    hashKey++;
+                    gp.object[index] = null;
+                }
                 break;
                 case "Door":
                 if(hashKey > 0){
-                    gp.object[index] = null;
-                    hashKey--;
+                    if(keyH.objecInteraction){
+                        gp.object[index] = null;
+                        hashKey--;
+                        
+                    }
                 }
             }
         }
