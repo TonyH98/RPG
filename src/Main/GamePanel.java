@@ -46,6 +46,8 @@ public Player player = new Player(this, keyH);
 
 public tileManager tileM = new tileManager(this);
 
+Sound sound = new Sound();
+
 public AssetSetter assetSetter = new AssetSetter(this);
 
 public superObject object[] = new superObject[10]; //Display only 10 objects at a time;
@@ -61,6 +63,7 @@ public GamePanel(){
 
 public void setUpGame(){
     assetSetter.setObject();
+    playMusic(0);
 }
 
 public void startGameThread(){
@@ -135,6 +138,23 @@ public void paintComponent(Graphics g){
 
     g2.dispose();
 
+}
+
+public void playMusic(int i){
+
+sound.setFile(i);
+sound.play();
+sound.loop();
+}
+
+public void stopMusic()
+{
+    sound.stop();
+}
+
+public void playSE(int i){
+    sound.setFile(i);
+    sound.play();
 }
 
 }

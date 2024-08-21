@@ -84,7 +84,7 @@ public class Player extends Entity{
         
             // Check if sprinting
             if (keyH.sprintPressed) {
-                actualSpeed += 5; // Increase the speed when sprinting
+                actualSpeed += 3; // Increase the speed when sprinting
             }
         
             // Set the direction based on key input
@@ -142,6 +142,7 @@ public class Player extends Entity{
                 if(keyH.objecInteraction){
                     hashKey++;
                     gp.object[index] = null;
+                    gp.playSE(1);
                 }
                 break;
                 case "Door":
@@ -152,6 +153,12 @@ public class Player extends Entity{
                         
                     }
                 }
+                case "Boots":
+                if(keyH.objecInteraction){
+                    gp.object[index] = null;
+                    speed += 2;
+                }
+                break;
             }
         }
     }

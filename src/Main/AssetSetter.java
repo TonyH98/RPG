@@ -1,5 +1,6 @@
 package Main;
 
+import object.boots;
 import object.chest;
 import object.door;
 import object.key;
@@ -43,6 +44,10 @@ public class AssetSetter {
         gp.object[6] = new chest();
         gp.object[6].worldX = 10 * gp.titleSize;
         gp.object[6].worldY = 7 * gp.titleSize;
+
+        gp.object[7] = new boots();
+        gp.object[7].worldX = 37 * gp.titleSize;
+        gp.object[7].worldY = 42 * gp.titleSize;
 
     }
 
