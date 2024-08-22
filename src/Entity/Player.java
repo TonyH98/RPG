@@ -11,19 +11,20 @@ import javax.imageio.ImageIO;
 import Main.GamePanel;
 
 import Main.KeyHandler;
+import Main.UI;
 
 
 public class Player extends Entity{
 
     GamePanel gp;
-
+    UI ui;
     KeyHandler keyH;
 
     public final int screenX;
     
     public final int screenY;
 
-    int hashKey = 0;
+    public int hashKey = 0;
 
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
@@ -143,6 +144,8 @@ public class Player extends Entity{
                     hashKey++;
                     gp.object[index] = null;
                     gp.playSE(1);
+                    gp.ui.showMessage("Got key!");
+                    
                 }
                 break;
                 case "Door":

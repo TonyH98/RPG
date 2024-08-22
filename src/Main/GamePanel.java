@@ -44,9 +44,12 @@ public CollisionChecker checker = new CollisionChecker(this);
 
 public Player player = new Player(this, keyH);
 
+public UI ui = new UI(this);
+
 public tileManager tileM = new tileManager(this);
 
-Sound sound = new Sound();
+Sound music = new Sound();
+Sound se = new Sound ();
 
 public AssetSetter assetSetter = new AssetSetter(this);
 
@@ -134,6 +137,9 @@ public void paintComponent(Graphics g){
     //player
     player.draw(g2);
 
+    //UI
+    ui.draw(g2);
+    
     player.drawCollisionBox(g2);
 
     g2.dispose();
@@ -142,19 +148,19 @@ public void paintComponent(Graphics g){
 
 public void playMusic(int i){
 
-sound.setFile(i);
-sound.play();
-sound.loop();
+music.setFile(i);
+music.play();
+music.loop();
 }
 
 public void stopMusic()
 {
-    sound.stop();
+    music.stop();
 }
 
 public void playSE(int i){
-    sound.setFile(i);
-    sound.play();
+    se.setFile(i);
+    se.play();
 }
 
 }
