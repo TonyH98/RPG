@@ -7,7 +7,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
+
 import Main.GamePanel;
+import Main.UtitltyTool;
 
 public class tileManager {
 
@@ -31,29 +33,30 @@ public tileManager(GamePanel gp){
 
 public void getTitleImage(){
 
+
+        setUp(0, "/grass", false);
+
+        setUp(1, "/Brick", false);
+
+        setUp(2, "/water", true);
+
+        setUp(3, "/sand", false);
+
+        setUp(4, "/tree", true);
+
+        setUp(5, "/earth", false);
+
+}
+
+public void setUp(int index, String imagePath, boolean collison){
+
+    UtitltyTool uTool = new UtitltyTool();
+
     try{
-
-        tile[0] = new tile();
-        tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass.png"));
-
-        tile[1] = new tile();
-        tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Brick.png"));
-        tile[1].collison = true;
-
-        tile[2] = new tile();
-        tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
-        tile[2].collison = true;
-
-        tile[4] = new tile();
-        tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
-        tile[4].collison = true;
-
-        tile[3] = new tile();
-        tile[3].image = ImageIO.read(getClass().getResource("/tiles/sand.png"));
-        
-        tile[5] = new tile();
-        tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));
-
+        tile[index] = new tile();
+        tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles" + imagePath + ".png"));
+        tile[index].image = uTool.scaleImage(tile[index].image, gp.titleSize, gp.titleSize);
+        tile[index].collison = collison;
     }
     catch(IOException e){
         e.printStackTrace();
@@ -117,7 +120,7 @@ public void draw(Graphics2D g2){
         if(worldX + gp.titleSize > gp.player.worldX - gp.player.screenX && worldX - gp.titleSize < gp.player.worldX + gp.player.screenX 
         && worldY + gp.titleSize > gp.player.worldY - gp.player.screenY && worldY - gp.titleSize < gp.player.worldY + gp.player.screenY){ //Create a boundry to draw what is necessary
 
-            g2.drawImage(tile[tileNum].image, screenX, screenY, gp.titleSize, gp.titleSize, null);
+            g2.drawImage(tile[tileNum].image, screenX, screenY, null);
         }
         worldCol++;
 

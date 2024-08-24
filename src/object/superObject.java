@@ -4,11 +4,13 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import Main.GamePanel;
+import Main.UtitltyTool;
 
 public class superObject {
 
     public BufferedImage image;
 
+   UtitltyTool utool = new UtitltyTool();
     public String name;
 
     public boolean collison = false;

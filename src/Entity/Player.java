@@ -12,6 +12,8 @@ import Main.GamePanel;
 
 import Main.KeyHandler;
 import Main.UI;
+import Main.UtitltyTool;
+
 
 
 public class Player extends Entity{
@@ -61,21 +63,33 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage(){
+        up1 = setUp("/boy_up_1");
+        up2 = setUp("/boy_up_2");
+        down1 = setUp("/boy_down_1");
+        down2 = setUp("/boy_down_2");
+        left1 = setUp("/boy_left_1");
+        left2 = setUp("/boy_left_2");
+        right1 = setUp("/boy_right_1");
+        right2 = setUp("/boy_right_2");
+    }
+    
+    public BufferedImage setUp(String imageName){
+        
+        UtitltyTool uTool = new UtitltyTool();
+
+        BufferedImage scaledImage = null;
+
         try{
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
+            scaledImage = ImageIO.read(getClass().getResourceAsStream("/player" + imageName + ".png"));
+            scaledImage = uTool.scaleImage(scaledImage, gp.titleSize, gp.titleSize);
         }
         catch(IOException e){
             e.printStackTrace();
         }
+
+        return scaledImage;
+        
     }
-    
 
     public void update() {
         boolean isMoving = keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed;
@@ -149,19 +163,29 @@ public class Player extends Entity{
                 }
                 break;
                 case "Door":
-                if(hashKey > 0){
-                    if(keyH.objecInteraction){
-                        gp.object[index] = null;
-                        hashKey--;
-                        
+                if(keyH.objecInteraction){
+                    if(hashKey > 0){
+                            gp.object[index] = null;
+                            hashKey--;
+                    }
+                    else{
+                        gp.ui.showMessage("Need key to open the");
                     }
                 }
+                break;
                 case "Boots":
                 if(keyH.objecInteraction){
                     gp.object[index] = null;
                     speed += 2;
                 }
                 break;
+
+                case "Chest": 
+                gp.ui.gameFinished = true;
+                gp.stopMusic();
+                gp.playSE(4);
+                break;
+
             }
         }
     }
@@ -207,6 +231,6 @@ public class Player extends Entity{
                 break;
         }
 
-        g2.drawImage(image, screenX, screenY , gp.titleSize, gp.titleSize, null);
+        g2.drawImage(image, screenX, screenY, null);
     }
 }
