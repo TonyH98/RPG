@@ -26,7 +26,7 @@ public class Player extends Entity{
     
     public final int screenY;
 
-    public int hashKey = 0;
+    // public int hashKey = 0;
 
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
@@ -150,43 +150,7 @@ public class Player extends Entity{
     
     public void pickUpObject(int index){
         if(index != 999){
-            String objectName = gp.object[index].name;
-
-            switch(objectName){
-                case "Key":
-                if(keyH.objecInteraction){
-                    hashKey++;
-                    gp.object[index] = null;
-                    gp.playSE(1);
-                    gp.ui.showMessage("Got key!");
-                    
-                }
-                break;
-                case "Door":
-                if(keyH.objecInteraction){
-                    if(hashKey > 0){
-                            gp.object[index] = null;
-                            hashKey--;
-                    }
-                    else{
-                        gp.ui.showMessage("Need key to open the");
-                    }
-                }
-                break;
-                case "Boots":
-                if(keyH.objecInteraction){
-                    gp.object[index] = null;
-                    speed += 2;
-                }
-                break;
-
-                case "Chest": 
-                gp.ui.gameFinished = true;
-                gp.stopMusic();
-                gp.playSE(4);
-                break;
-
-            }
+            
         }
     }
 

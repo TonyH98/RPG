@@ -32,11 +32,16 @@ public final int maxWorldRow = 50;
 public final int worldWidth = titleSize * maxWorldCol;
 public final int worldHeight = titleSize * maxScreenRow;
 
+//Game State
+public int gameState;
+public final int playState = 1;
+public final int pauseState = 2;
+
 
 //fps
 int fps = 60;
 
-KeyHandler keyH = new KeyHandler();
+KeyHandler keyH = new KeyHandler(this);
 
 Thread gameThread;  
 
@@ -67,6 +72,7 @@ public GamePanel(){
 public void setUpGame(){
     assetSetter.setObject();
     playMusic(0);
+    gameState = playState;
 }
 
 public void startGameThread(){
@@ -113,7 +119,12 @@ public void run(){
 
 public void update(){
 
-   player.update();
+    if(gameState == playState){
+        player.update();
+    }
+    if(gameState == pauseState){
+
+    }
 
 }
 
