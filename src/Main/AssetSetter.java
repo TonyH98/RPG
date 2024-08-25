@@ -1,9 +1,6 @@
 package Main;
 
-import object.boots;
-import object.chest;
-import object.door;
-import object.key;
+import Entity.NPC_OldMan;
 
 public class AssetSetter {
 
@@ -18,6 +15,13 @@ public class AssetSetter {
     public void setObject(){
 
        
+
+    }
+
+    public void setNPC(){
+        gp.npc[0] = new NPC_OldMan(gp);
+        gp.npc[0].worldX = gp.titleSize * 21;
+        gp.npc[0].worldY = gp.titleSize * 21;
 
     }
 

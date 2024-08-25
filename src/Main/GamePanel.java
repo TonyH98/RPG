@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
+import Entity.Entity;
 import Entity.Player;
 import tile.tileManager;
 import object.superObject;
@@ -49,6 +50,8 @@ public CollisionChecker checker = new CollisionChecker(this);
 
 public Player player = new Player(this, keyH);
 
+public Entity npc[] = new Entity[10];
+
 public UI ui = new UI(this);
 
 public tileManager tileM = new tileManager(this);
@@ -71,6 +74,7 @@ public GamePanel(){
 
 public void setUpGame(){
     assetSetter.setObject();
+    assetSetter.setNPC();
     playMusic(0);
     gameState = playState;
 }
@@ -121,6 +125,12 @@ public void update(){
 
     if(gameState == playState){
         player.update();
+
+        for(int i = 0 ; i < npc.length; i++){
+            if(npc[i] != null){
+                npc[i].update();
+            }
+        }
     }
     if(gameState == pauseState){
 
@@ -149,6 +159,13 @@ public void paintComponent(Graphics g){
     for(int i = 0 ; i < object.length; i++){
         if(object[i] != null){
             object[i].draw(g2, this);
+        }
+    }
+
+    //npc
+    for(int i = 0 ; i < npc.length; i++){
+        if(npc[i] != null){
+            npc[i].draw(g2);
         }
     }
 

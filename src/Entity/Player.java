@@ -4,21 +4,20 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+
+
 
 import Main.GamePanel;
 
 import Main.KeyHandler;
 import Main.UI;
-import Main.UtitltyTool;
+
 
 
 
 public class Player extends Entity{
 
-    GamePanel gp;
     UI ui;
     KeyHandler keyH;
 
@@ -26,9 +25,9 @@ public class Player extends Entity{
     
     public final int screenY;
 
-    // public int hashKey = 0;
-
     public Player(GamePanel gp, KeyHandler keyH){
+        super(gp);
+
         this.gp = gp;
         this.keyH = keyH;
 
@@ -63,33 +62,17 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage(){
-        up1 = setUp("/boy_up_1");
-        up2 = setUp("/boy_up_2");
-        down1 = setUp("/boy_down_1");
-        down2 = setUp("/boy_down_2");
-        left1 = setUp("/boy_left_1");
-        left2 = setUp("/boy_left_2");
-        right1 = setUp("/boy_right_1");
-        right2 = setUp("/boy_right_2");
+        up1 = setUp("/player/boy_up_1");
+        up2 = setUp("/player/boy_up_2");
+        down1 = setUp("/player/boy_down_1");
+        down2 = setUp("/player/boy_down_2");
+        left1 = setUp("/player/boy_left_1");
+        left2 = setUp("/player/boy_left_2");
+        right1 = setUp("/player/boy_right_1");
+        right2 = setUp("/player/boy_right_2");
     }
     
-    public BufferedImage setUp(String imageName){
-        
-        UtitltyTool uTool = new UtitltyTool();
 
-        BufferedImage scaledImage = null;
-
-        try{
-            scaledImage = ImageIO.read(getClass().getResourceAsStream("/player" + imageName + ".png"));
-            scaledImage = uTool.scaleImage(scaledImage, gp.titleSize, gp.titleSize);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-
-        return scaledImage;
-        
-    }
 
     public void update() {
         boolean isMoving = keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed;
@@ -120,7 +103,11 @@ public class Player extends Entity{
             //Check object collision
             int objIndex = gp.checker.checkObject(this, true);
             pickUpObject(objIndex);
-    
+            
+            int npcIndex = gp.checker.checkEntity(this, gp.npc);
+
+            interactNPC(npcIndex);
+
             // If collision is false, move the player
             if (!collisionOn) {
                 switch (direction) {
@@ -151,6 +138,12 @@ public class Player extends Entity{
     public void pickUpObject(int index){
         if(index != 999){
             
+        }
+    }
+
+    public void interactNPC(int i){
+        if(i != 999){
+            System.out.println("You are hitting an npc");
         }
     }
 
