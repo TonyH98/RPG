@@ -22,42 +22,52 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
 
         int code = e.getKeyCode();
-
-        if(code == KeyEvent.VK_W){
-            upPressed = true;
-        }
-        if(code == KeyEvent.VK_S){
-            downPressed = true;
-        }
-        if(code == KeyEvent.VK_A){
-            leftPressed = true;
-        }
-        if(code == KeyEvent.VK_D){
-            rightPressed = true;
-        }
-        if(code == KeyEvent.VK_K){
-            sprintPressed = true;
-        }
-        if(code == KeyEvent.VK_J){
-            objecInteraction = true;
-        }
-        if(code == KeyEvent.VK_P){
-            if(gp.gameState == gp.playState){
+        if(gp.gameState == gp.playState){
+            if(code == KeyEvent.VK_W){
+                upPressed = true;
+            }
+            if(code == KeyEvent.VK_S){
+                downPressed = true;
+            }
+            if(code == KeyEvent.VK_A){
+                leftPressed = true;
+            }
+            if(code == KeyEvent.VK_D){
+                rightPressed = true;
+            }
+            if(code == KeyEvent.VK_K){
+                sprintPressed = true;
+            }
+            if(code == KeyEvent.VK_J){
+                objecInteraction = true;
+            }
+            if(code == KeyEvent.VK_P){
                 gp.gameState = gp.pauseState;
             }
-            else if(gp.gameState == gp.pauseState){
+            if(code == KeyEvent.VK_T){
+                if(debugK == false){
+                    debugK = true;
+                }
+                else if(debugK == true){
+                    debugK = false;
+                }
+    
+            }
+
+        }
+
+        //Pause State
+        if(gp.gameState == gp.pauseState){
+            if(code == KeyEvent.VK_P){
                 gp.gameState = gp.playState;
             }
         }
-        if(code == KeyEvent.VK_T){
-            if(debugK == false){
-                debugK = true;
+        //Dialouge State
+       if(gp.gameState == gp.dialogeState){
+            if(code == KeyEvent.VK_J){
+                gp.gameState = gp.playState;
             }
-            else if(debugK == true){
-                debugK = false;
-            }
-
-        }
+       }
 
         
     }

@@ -3,9 +3,13 @@ package Entity;
 import java.util.Random;
 
 import Main.GamePanel;
+import Main.KeyHandler;
 
 
 public class NPC_OldMan extends Entity {
+
+        KeyHandler keyH;
+        private int dialougeNum = 1;
 
 public NPC_OldMan(GamePanel gp){
     super(gp);
@@ -13,6 +17,7 @@ public NPC_OldMan(GamePanel gp){
     direction = "down";
     speed = 1;
     getImage();
+    setDiaglogue();
 }
 
 
@@ -25,6 +30,12 @@ public NPC_OldMan(GamePanel gp){
         left2 = setUp("/npc/oldman_left_2");
         right1 = setUp("/npc/oldman_right_1");
         right2 = setUp("/npc/oldman_right_2");
+    }
+
+    public void setDiaglogue(){
+
+        dialogues[0] = "Welcome to the game";
+        dialogues[1] = "My name is Jared and this is world x";
     }
     
     public void setAction(){
@@ -51,6 +62,17 @@ public NPC_OldMan(GamePanel gp){
             actionLockCounter = 0;
         }
 
+    }
+
+    public void speak(){
+
+        gp.ui.currentDialogeString = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        if(dialogueIndex >= dialougeNum){
+            dialogueIndex = 0;
+        }
+    
     }
 
 }

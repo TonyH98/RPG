@@ -37,6 +37,7 @@ public final int worldHeight = titleSize * maxScreenRow;
 public int gameState;
 public final int playState = 1;
 public final int pauseState = 2;
+public final int dialogeState = 3;
 
 
 //fps
@@ -175,7 +176,7 @@ public void paintComponent(Graphics g){
     //UI
     ui.draw(g2);
     
-    player.drawCollisionBox(g2);
+
 
 
     if(keyH.debugK == true){

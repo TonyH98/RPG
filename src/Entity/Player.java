@@ -16,6 +16,7 @@ import Main.UI;
 
 
 
+
 public class Player extends Entity{
 
     UI ui;
@@ -141,11 +142,16 @@ public class Player extends Entity{
         }
     }
 
-    public void interactNPC(int i){
-        if(i != 999){
-            System.out.println("You are hitting an npc");
+    public void interactNPC(int i) {
+        if (i != 999 && keyH.objecInteraction ) {
+                gp.gameState = gp.dialogeState;
+                gp.npc[i].speak();      
+        }
+        else if(gp.gameState == gp.dialogeState){
+            gp.gameState = gp.playState;
         }
     }
+    
 
     public void draw(Graphics2D g2){
 

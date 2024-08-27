@@ -132,6 +132,7 @@ public class CollisionChecker {
                             index = i;
                            }
                     }
+                    break;
         
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
@@ -192,12 +193,14 @@ public class CollisionChecker {
                     break;
                     case "right":
                     entity.solidArea.x += entity.speed;
-                    if(entity.solidArea.intersects(gp.object[i].solidArea)){
+                    if(entity.solidArea.intersects(target[i].solidArea)){
                         
                             entity.collisionOn = true;
                 
                             index = i;
                     }
+
+                    break;
         
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
@@ -256,6 +259,7 @@ public class CollisionChecker {
           
                 
               }
+              break;
   
           }
           entity.solidArea.x = entity.solidAreaDefaultX;
