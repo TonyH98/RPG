@@ -9,7 +9,7 @@ import Main.KeyHandler;
 public class NPC_OldMan extends Entity {
 
         KeyHandler keyH;
-        private int dialougeNum = 1;
+      
 
 public NPC_OldMan(GamePanel gp){
     super(gp);
@@ -35,7 +35,7 @@ public NPC_OldMan(GamePanel gp){
     public void setDiaglogue(){
 
         dialogues[0] = "Welcome to the game";
-        dialogues[1] = "My name is Jared and this is world x";
+        dialogues[1] = "My name is Jared \nand this is world x";
     }
     
     public void setAction(){
@@ -66,12 +66,8 @@ public NPC_OldMan(GamePanel gp){
 
     public void speak(){
 
-        gp.ui.currentDialogeString = dialogues[dialogueIndex];
-        dialogueIndex++;
+       super.speak();
 
-        if(dialogueIndex >= dialougeNum){
-            dialogueIndex = 0;
-        }
     
     }
 

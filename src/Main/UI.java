@@ -79,11 +79,14 @@ public class UI {
         int height = gp.titleSize * 3;
 
         drawSubWidnow(x, y, width, height);
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28F));
         x += gp.titleSize;
         y += gp.titleSize;
 
-        g2.drawString(currentDialogeString, x, y);
+        for(String line: currentDialogeString.split("\n")){
+            g2.drawString(line, x , y);
+            y += 40;
+        }
 
     }
 
