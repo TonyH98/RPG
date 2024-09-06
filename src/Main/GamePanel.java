@@ -35,6 +35,7 @@ public final int worldHeight = titleSize * maxScreenRow;
 
 //Game State
 public int gameState;
+public final int titleState = 0;
 public final int playState = 1;
 public final int pauseState = 2;
 public final int dialogeState = 3;
@@ -77,7 +78,7 @@ public void setUpGame(){
     assetSetter.setObject();
     assetSetter.setNPC();
     playMusic(0);
-    gameState = playState;
+    gameState = titleState;
 }
 
 public void startGameThread(){
@@ -153,28 +154,38 @@ public void paintComponent(Graphics g){
         drawStart = System.nanoTime();
     }
 
-    //tile
-    tileM.draw(g2);
+    //title screen
 
-    //Object
-    for(int i = 0 ; i < object.length; i++){
-        if(object[i] != null){
-            object[i].draw(g2, this);
+    if(gameState == titleState){
+        ui.draw(g2);
+    }
+    
+    else{
+        //tile
+        tileM.draw(g2);
+    
+        //Object
+        for(int i = 0 ; i < object.length; i++){
+            if(object[i] != null){
+                object[i].draw(g2, this);
+            }
         }
+    
+        //npc
+        for(int i = 0 ; i < npc.length; i++){
+            if(npc[i] != null){
+                npc[i].draw(g2);
+            }
+        }
+    
+        //player
+        player.draw(g2);
+    
+        //UI
+        ui.draw(g2);
+
     }
 
-    //npc
-    for(int i = 0 ; i < npc.length; i++){
-        if(npc[i] != null){
-            npc[i].draw(g2);
-        }
-    }
-
-    //player
-    player.draw(g2);
-
-    //UI
-    ui.draw(g2);
     
 
 

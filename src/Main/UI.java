@@ -18,6 +18,7 @@ public class UI {
     public String message = "";
     public boolean gameFinished = false;
     public String currentDialogeString = "";
+    public int commandNum = 0;
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -46,6 +47,9 @@ public class UI {
         g2.setFont(ariel_40);
         g2.setColor(Color.white);
 
+        if(gp.gameState == gp.titleState){
+            drawTitleScreen();
+        }
         if(gp.gameState == gp.playState){
             //Do playState stuff
         }
@@ -60,6 +64,54 @@ public class UI {
         }
     }
 
+
+    public void drawTitleScreen(){
+        //Title Name
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80F));
+        String text = "Dragon Adventure";
+
+        int x = getXForCenterText(text);
+        int y = gp.titleSize * 3;
+        g2.setColor(Color.gray);
+        g2.drawString(text, x+5, y+5);
+
+        g2.setColor(Color.WHITE);
+        g2.drawString(text, x, y);
+
+        x = gp.screenWidth/2 - (gp.titleSize*2)/2;
+        y += gp.titleSize*2;
+        g2.drawImage(gp.player.down1, x , y, gp.titleSize * 2, gp.titleSize * 2, null);
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+
+        text = "New Game";
+        x =  getXForCenterText(text);
+        y += gp.titleSize * 3.2;
+        g2.drawString(text, x, y);
+
+        if(commandNum == 0){
+            g2.drawString(">", x - gp.titleSize, y);
+        }
+        text = "Load Game";
+        x =  getXForCenterText(text);
+        y += gp.titleSize;
+        g2.drawString(text, x, y);
+
+        if(commandNum == 1){
+            g2.drawString(">", x - gp.titleSize, y);
+        }
+
+        text = "Quit";
+        x =  getXForCenterText(text);
+        y += gp.titleSize;
+        g2.drawString(text, x, y);
+
+        if(commandNum == 2){
+            g2.drawString(">", x - gp.titleSize, y);
+        }
+
+
+    }
     public void drawPauseScreen(){
         String text = "PAUSED";
 
