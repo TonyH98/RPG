@@ -23,7 +23,7 @@ public class App {
 
        gamePanel.setUpGame();
 
-       gamePanel.startGameThread();
+       gamePanel.startGameThread(); //Testing
 
     }
 };
