@@ -8,7 +8,7 @@ import Main.UtitltyTool;
 
 public class superObject {
 
-    public BufferedImage image;
+    public BufferedImage image, image2, image3;
 
    UtitltyTool utool = new UtitltyTool();
     public String name;

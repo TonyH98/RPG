@@ -7,6 +7,11 @@ import java.awt.Graphics2D;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import object.hearts;
+import object.superObject;
+
+import java.awt.image.BufferedImage;
+
 public class UI {
 
     GamePanel gp;
@@ -19,13 +24,18 @@ public class UI {
     public boolean gameFinished = false;
     public String currentDialogeString = "";
     public int commandNum = 0;
+    BufferedImage heart_full, heart_half, heart_blank;
 
     public UI(GamePanel gp) {
         this.gp = gp;
         ariel_40 = new Font("Ariel", Font.PLAIN, 40);
         ariel_80B = new Font("Ariel", Font.BOLD, 80);
 
+        superObject heart = new hearts(gp);
 
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_blank = heart.image3;
     }
 
     public void showMessage(String text) {
@@ -52,15 +62,43 @@ public class UI {
         }
         if(gp.gameState == gp.playState){
             //Do playState stuff
+            drawPlayerLife();
         }
         if(gp.gameState == gp.pauseState){
-
+            drawPlayerLife();
             drawPauseScreen();
         }
 
         //Dialogue State
         if(gp.gameState == gp.dialogeState){
+            drawPlayerLife();
             drawDialogueScreen();
+        }
+    }
+
+    public void drawPlayerLife(){
+        int x = gp.titleSize/2;
+        int y = gp.titleSize/2;
+        int i = 0;
+
+        while(i < gp.player.maxLife/2){
+            g2.drawImage(heart_blank, x, y, null);
+            i++;
+            x += gp.titleSize;
+        }
+
+        x = gp.titleSize/2;
+        y = gp.titleSize/2;
+        i = 0;
+
+        while(i < gp.player.life){
+            g2.drawImage(heart_half, x, y, null);
+            i++;
+            if(i < gp.player.life){
+                g2.drawImage(heart_full, x, y , null);
+            }
+            i++;
+            x += gp.titleSize;
         }
     }
 
