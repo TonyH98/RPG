@@ -111,6 +111,10 @@ public class Player extends Entity{
 
             interactNPC(npcIndex);
 
+            //Check event
+
+            gp.eHandler.checkEvent();
+
             // If collision is false, move the player
             if (!collisionOn) {
                 switch (direction) {

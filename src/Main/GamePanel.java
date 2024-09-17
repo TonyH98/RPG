@@ -65,6 +65,8 @@ public AssetSetter assetSetter = new AssetSetter(this);
 
 public superObject object[] = new superObject[10]; //Display only 10 objects at a time;
 
+public EventHandler eHandler = new EventHandler(this);
+
 public GamePanel(){
 
     this.setPreferredSize(new DimensionUIResource(screenWidth, screenHeight));
