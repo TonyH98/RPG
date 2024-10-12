@@ -1,15 +1,18 @@
 package Main;
+import Entity.Entity;
+import Entity.Player;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
+import jdk.dynalink.linker.ConversionComparator;
 
-import Entity.Entity;
-import Entity.Player;
 import tile.tileManager;
-import object.superObject;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -63,7 +66,9 @@ Sound se = new Sound ();
 
 public AssetSetter assetSetter = new AssetSetter(this);
 
-public superObject object[] = new superObject[10]; //Display only 10 objects at a time;
+public Entity object[] = new Entity[10]; //Display only 10 objects at a time;
+
+ArrayList <Entity> entityList = new ArrayList<>();
 
 public EventHandler eHandler = new EventHandler(this);
 
@@ -165,24 +170,40 @@ public void paintComponent(Graphics g){
     else{
         //tile
         tileM.draw(g2);
-    
-        //Object
-        for(int i = 0 ; i < object.length; i++){
-            if(object[i] != null){
-                object[i].draw(g2, this);
-            }
-        }
-    
-        //npc
+
+        //Add entities to the list
+        entityList.add(player);
         for(int i = 0 ; i < npc.length; i++){
             if(npc[i] != null){
-                npc[i].draw(g2);
+                entityList.add(npc[i]);
             }
         }
-    
-        //player
-        player.draw(g2);
-    
+
+        for(int i = 0 ; i < object.length; i++){
+            if(object[i] != null){
+                entityList.add(object[i]);
+            }
+        }
+        
+       Collections.sort(entityList, new Comparator<Entity>(){
+
+        public int compare (Entity e1, Entity e2){
+
+            int result = Integer.compare(e1.worldY, e2.worldY);
+            return result;
+
+        }
+       });
+
+
+        for(int i = 0 ; i < entityList.size(); i++){
+            entityList.get(i).draw(g2);
+        }
+
+         for(int i = 0 ; i < entityList.size(); i++){
+            entityList.remove(i);
+        }
+
         //UI
         ui.draw(g2);
 

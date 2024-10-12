@@ -1,16 +1,14 @@
 package Main;
 
+import Entity.Entity;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import object.hearts;
-import object.superObject;
-
-import java.awt.image.BufferedImage;
 
 public class UI {
 
@@ -31,7 +29,7 @@ public class UI {
         ariel_40 = new Font("Ariel", Font.PLAIN, 40);
         ariel_80B = new Font("Ariel", Font.BOLD, 80);
 
-        superObject heart = new hearts(gp);
+        Entity heart = new hearts(gp);
 
         heart_full = heart.image;
         heart_half = heart.image2;

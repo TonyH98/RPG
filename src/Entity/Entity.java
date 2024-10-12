@@ -1,14 +1,12 @@
 package Entity;
 
+import Main.GamePanel;
+import Main.UtitltyTool;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
-import Main.GamePanel;
-import Main.UtitltyTool;
 
 public class Entity {
 
@@ -20,7 +18,7 @@ public class Entity {
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
 
-    public String direction;
+    public String direction = "down";
 
     public int spriteCounter = 0;
 
@@ -33,6 +31,12 @@ public class Entity {
     public boolean collisionOn = false;
 
     public int actionLockCounter = 0; 
+
+    public BufferedImage image, image2, image3;
+
+    public String name;
+
+    public boolean collison = false;
 
     String dialogues[] = new String[20];
 
