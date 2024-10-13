@@ -1,17 +1,12 @@
 package Entity;
 
+import Main.GamePanel;
+import Main.KeyHandler;
+import Main.UI;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-
-
-
-
-import Main.GamePanel;
-
-import Main.KeyHandler;
-import Main.UI;
 
 
 
@@ -113,6 +108,10 @@ public class Player extends Entity{
 
             //Check event
 
+            int monsterIndex = gp.checker.checkEntity(this, gp.monster);
+
+            contactMonster(monsterIndex);
+
             gp.eHandler.checkEvent();
 
             // If collision is false, move the player
@@ -140,8 +139,27 @@ public class Player extends Entity{
                 spriteCounter = 0;
             }
         }
+
+        if(invincible == true){
+            invincibleCounter++;
+            if(invincibleCounter > 60){
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
+
     }
     
+
+    public void contactMonster(int i){
+        if(i != 999){
+            if(invincible == false){
+                life -= 1;
+                invincible = true;
+            }
+        }
+    }
+
     public void pickUpObject(int index){
         if(index != 999){
             
@@ -201,5 +219,7 @@ public class Player extends Entity{
         }
 
         g2.drawImage(image, screenX, screenY, null);
+
+        
     }
 }

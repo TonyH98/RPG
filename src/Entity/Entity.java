@@ -16,6 +16,10 @@ public class Entity {
 
     public int speed; 
 
+    public boolean invincible = false;
+
+    public int invincibleCounter = 0;
+
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
 
     public String direction = "down";
@@ -44,6 +48,10 @@ public class Entity {
 
     public int maxLife;
     public int life;
+
+    public int type;
+
+
 
     public Entity(GamePanel gp){
         this.gp = gp;
@@ -84,7 +92,16 @@ public class Entity {
         collisionOn = false;
         gp.checker.checkTile(this);
         gp.checker.checkObject(this, false);
-        gp.checker.checkPlayer(this);
+        gp.checker.checkEntity(this, gp.npc);
+        gp.checker.checkEntity(this, gp.monster);
+        boolean checkPlayerContact = gp.checker.checkPlayer(this);
+
+        if(this.type == 2 && checkPlayerContact == true){
+            if(gp.player.invincible == false){
+                gp.player.life -= 1;
+                gp.player.invincible = true;
+            }
+        }
 
         if (collisionOn == false) {
             switch (direction) {

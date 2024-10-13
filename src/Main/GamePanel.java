@@ -7,11 +7,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
-import jdk.dynalink.linker.ConversionComparator;
-
 import tile.tileManager;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -57,6 +54,8 @@ public Player player = new Player(this, keyH);
 
 public Entity npc[] = new Entity[10];
 
+public Entity monster[] = new Entity[20];
+
 public UI ui = new UI(this);
 
 public tileManager tileM = new tileManager(this);
@@ -84,6 +83,7 @@ public GamePanel(){
 public void setUpGame(){
     assetSetter.setObject();
     assetSetter.setNPC();
+    assetSetter.setMonster();
     playMusic(0);
     gameState = titleState;
 }
@@ -140,6 +140,11 @@ public void update(){
                 npc[i].update();
             }
         }
+        for(int i = 0 ; i < monster.length ; i++){
+            if(monster[i] != null){
+                monster[i].update();
+            }
+        }
     }
     if(gameState == pauseState){
 
@@ -182,6 +187,12 @@ public void paintComponent(Graphics g){
         for(int i = 0 ; i < object.length; i++){
             if(object[i] != null){
                 entityList.add(object[i]);
+            }
+        }
+
+         for(int i = 0 ; i < monster.length; i++){
+            if(monster[i] != null){
+                entityList.add(monster[i]);
             }
         }
         

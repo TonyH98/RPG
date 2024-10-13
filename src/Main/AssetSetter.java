@@ -1,6 +1,6 @@
 package Main;
 
-import Entity.NPC_OldMan;
+import Monster.GreenSlime;
 
 public class AssetSetter {
 
@@ -19,10 +19,19 @@ public class AssetSetter {
     }
 
     public void setNPC(){
-        gp.npc[0] = new NPC_OldMan(gp);
-        gp.npc[0].worldX = gp.titleSize * 21;
-        gp.npc[0].worldY = gp.titleSize * 21;
+        // gp.npc[0] = new NPC_OldMan(gp);
+        // gp.npc[0].worldX = gp.titleSize * 21;
+        // gp.npc[0].worldY = gp.titleSize * 21;
 
+    }
+
+
+    public void setMonster(){
+        gp.monster[0] = new GreenSlime(gp);
+        gp.monster[0].worldX = gp.titleSize * 21;
+        gp.monster[0].worldY = gp.titleSize * 21;
+
+        
     }
 
 }
