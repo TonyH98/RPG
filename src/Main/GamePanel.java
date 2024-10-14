@@ -211,10 +211,8 @@ public void paintComponent(Graphics g){
             entityList.get(i).draw(g2);
         }
 
-         for(int i = 0 ; i < entityList.size(); i++){
-            entityList.remove(i);
-        }
-
+        entityList.clear();
+        
         //UI
         ui.draw(g2);
 

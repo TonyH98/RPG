@@ -10,7 +10,7 @@ public class key extends Entity{
 public key(GamePanel gp){
     super(gp);
     name = "Key";
-    down1 = setUp("/objects/key");
+    down1 = setUp("/objects/key", gp.titleSize, gp.titleSize);
 
 }
 

@@ -6,8 +6,12 @@ import java.util.Random;
 
 public class GreenSlime extends Entity{
 
+GamePanel gp;
+
 public GreenSlime(GamePanel gp){
     super(gp);
+
+    this.gp = gp;
 
     name = "Green Slime";
     speed = 1;
@@ -27,14 +31,14 @@ public GreenSlime(GamePanel gp){
 }
 
 public void getImage(){
-    up1 = setUp("/Monsters/greenslime_down_1");
-    up2 = setUp("/Monsters/greenslime_down_2");
-    left1 = setUp("/Monsters/greenslime_down_1");
-    left2 = setUp("/Monsters/greenslime_down_2");
-    right1 = setUp("/Monsters/greenslime_down_1");
-    right2 = setUp("/Monsters/greenslime_down_2");
-    down1 = setUp("/Monsters/greenslime_down_1");
-    down2 = setUp("/Monsters/greenslime_down_2");
+    up1 = setUp("/Monsters/greenslime_down_1" , gp.titleSize, gp.titleSize);
+    up2 = setUp("/Monsters/greenslime_down_2" , gp.titleSize, gp.titleSize);
+    left1 = setUp("/Monsters/greenslime_down_1", gp.titleSize, gp.titleSize);
+    left2 = setUp("/Monsters/greenslime_down_2", gp.titleSize, gp.titleSize);
+    right1 = setUp("/Monsters/greenslime_down_1", gp.titleSize, gp.titleSize);
+    right2 = setUp("/Monsters/greenslime_down_2", gp.titleSize, gp.titleSize);
+    down1 = setUp("/Monsters/greenslime_down_1", gp.titleSize, gp.titleSize);
+    down2 = setUp("/Monsters/greenslime_down_2", gp.titleSize, gp.titleSize);
 }
 
 

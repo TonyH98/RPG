@@ -11,7 +11,7 @@ public class door extends Entity{
 
     super(gp);
     name = "Door";
-    down1 = setUp("/objects/door");
+    down1 = setUp("/objects/door", gp.titleSize, gp.titleSize);
 
     collison = true;
 

@@ -12,7 +12,7 @@ public chest(GamePanel gp){
 
     name = "Chest";
 
-    down1 = setUp("/objects/key");
+    down1 = setUp("/objects/key", gp.titleSize, gp.titleSize);
 
 
 }

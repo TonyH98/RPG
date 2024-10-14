@@ -22,6 +22,10 @@ public class Entity {
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
 
+    public BufferedImage atkU1, atkU2, atkD1, atkD2, atkL1, atkL2, atkR1, atkR2;
+
+    public Rectangle attackArea = new Rectangle(0 , 0 , 0 , 0);
+
     public String direction = "down";
 
     public int spriteCounter = 0;
@@ -51,7 +55,7 @@ public class Entity {
 
     public int type;
 
-
+    public boolean attacking = false;
 
     public Entity(GamePanel gp){
         this.gp = gp;
@@ -180,7 +184,7 @@ public class Entity {
         }
     }
 
-       public BufferedImage setUp(String imageName){
+       public BufferedImage setUp(String imageName, int width, int height){
         
         UtitltyTool uTool = new UtitltyTool();
 
@@ -188,7 +192,7 @@ public class Entity {
 
         try{
             scaledImage = ImageIO.read(getClass().getResourceAsStream(imageName + ".png"));
-            scaledImage = uTool.scaleImage(scaledImage, gp.titleSize, gp.titleSize);
+            scaledImage = uTool.scaleImage(scaledImage, width, height);
         }
         catch(IOException e){
             e.printStackTrace();
