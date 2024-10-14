@@ -182,12 +182,42 @@ public void update() {
         if(spriteCounter > 5 && spriteCounter <= 25){
             spriteNum = 2;
 
+
+            //Save the current worldX, worldY, solidArea
             int currentWorldX = worldX;
             int currentWorldY = worldY;
             int solidAreaWidth = solidArea.width;
             int solidAreaHeight = solidArea.height;
 
-            
+            //Adjust players worldX/Y for the attackArea
+            switch(direction){
+                case "up":
+                    worldY -= attackArea.height;
+                    break;
+                case "down":
+                    worldY += attackArea.height;
+                    break;
+                case "left":
+                    worldX -= attackArea.width;
+                    break;
+                case "right":
+                    worldX += attackArea.width;
+                    break;
+            }
+
+            //Attack Hitbox becomes solid
+            solidArea.width = attackArea.width;
+            solidArea.height = attackArea.height;
+
+            //Check monster collison with the updated worldX, worldY, and solid Area
+            int monsterIndex = gp.checker.checkEntity(this, gp.monster);
+            damageMonster(monsterIndex);
+
+            worldX = currentWorldX;
+            worldY = currentWorldY;
+            solidArea.width = solidAreaWidth;
+            solidArea.height = solidAreaHeight;
+
         }
         if(spriteCounter > 25){
             spriteNum = 1;
@@ -202,6 +232,22 @@ public void update() {
                 life -= 1;
                 invincible = true;
             }
+        }
+    }
+
+    public void damageMonster(int i){
+        if(i != 999){
+            if(gp.monster[i].invincible == false){
+                gp.monster[i].life -= 1;
+                gp.monster[i].invincible = true;
+                if(gp.monster[i].life <= 0){
+                    gp.monster[i] = null;
+                }
+
+            }
+        }
+        else{
+            System.out.print("Miss");
         }
     }
 

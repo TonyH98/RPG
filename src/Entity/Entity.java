@@ -2,6 +2,7 @@ package Entity;
 
 import Main.GamePanel;
 import Main.UtitltyTool;
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -130,6 +131,14 @@ public class Entity {
             spriteNum = spriteNum == 1 ? 2 : 1;
             spriteCounter = 0;
         }
+
+           if (invincible) {
+        invincibleCounter++;
+        if (invincibleCounter > 40) {
+            invincible = false;
+            invincibleCounter = 0;
+        }
+    }
     
     }
 
@@ -179,8 +188,13 @@ public class Entity {
                 }
                     break;
             }
+            
+            if(invincible == true){
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+            }
 
             g2.drawImage(image, screenX, screenY, gp.titleSize, gp.titleSize, null);
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         }
     }
 
