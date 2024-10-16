@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 public class Player extends Entity{
 
     UI ui;
+
     KeyHandler keyH;
 
     public final int screenX;
@@ -41,7 +42,8 @@ public class Player extends Entity{
 
         attackArea.width = 36;
         attackArea.height = 36;
-
+        currentExp = 0;
+        currLvl = 1; 
         setDefaultValues();
         getPlayerImage();
         getPlayerAtkImage();
@@ -241,6 +243,8 @@ public void update() {
                 gp.monster[i].life -= 1;
                 gp.monster[i].invincible = true;
                 if(gp.monster[i].life <= 0){
+                    gp.player.currentExp += gp.monster[i].expPoints;
+                    System.out.println("Current exp " + currentExp);
                     gp.monster[i] = null;
                 }
 

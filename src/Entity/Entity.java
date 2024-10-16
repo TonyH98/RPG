@@ -21,6 +21,10 @@ public class Entity {
 
     public int invincibleCounter = 0;
 
+    public int currentExp;
+
+    public int currLvl;
+
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
 
     public BufferedImage atkU1, atkU2, atkD1, atkD2, atkL1, atkL2, atkR1, atkR2;
@@ -46,7 +50,8 @@ public class Entity {
     public String name;
 
     public boolean collison = false;
-
+    
+    public int expPoints;
     String dialogues[] = new String[20];
 
     int dialogueIndex = 0;

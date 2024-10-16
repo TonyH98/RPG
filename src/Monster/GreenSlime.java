@@ -24,6 +24,7 @@ public GreenSlime(GamePanel gp){
     solidArea.height = 30;
     solidAreaDefaultX = solidArea.x;
     solidAreaDefaultY = solidArea.y;
+    expPoints = 10;
 
     type = 2;
 
