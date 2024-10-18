@@ -242,7 +242,11 @@ public void update() {
     public void damageMonster(int i){
         if(i != 999){
             if(gp.monster[i].invincible == false){
-                gp.monster[i].life -= 1;
+                
+                //Damage Formula
+                int damage = Math.max(1, (int)Math.round(gp.player.strength * 1.2) - (int)Math.round(gp.monster[i].def * 1.2));
+
+                gp.monster[i].life -= damage;
                 gp.monster[i].invincible = true;
                    if(gp.monster[i].life <= 0){
                 System.out.println("Monster defeated! Gaining " + gp.monster[i].expPoints + " EXP.");
@@ -259,7 +263,8 @@ public void update() {
                 System.err.println("Player current Strength " + gp.player.strength);
 
                 System.err.println("Player current Def " + gp.player.def);
-                // Remove the monster
+               
+
                 gp.monster[i] = null;
             }
 

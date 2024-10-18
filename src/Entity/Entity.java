@@ -102,7 +102,7 @@ public class Entity {
     }
 
     public void update(){
-
+        int monsterIndex = gp.checker.checkEntity(this, gp.monster);
         setAction();
         collisionOn = false;
         gp.checker.checkTile(this);
@@ -113,7 +113,8 @@ public class Entity {
 
         if(this.type == 2 && checkPlayerContact == true){
             if(gp.player.invincible == false){
-                gp.player.life -= 1;
+                int damage = Math.max(1, (int)Math.round(gp.player.strength * 1.2) - (int)Math.round(gp.monster[monsterIndex].def * 1.2));
+                gp.player.life -= damage;
                 gp.player.invincible = true;
             }
         }
