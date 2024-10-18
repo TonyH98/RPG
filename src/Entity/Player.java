@@ -242,11 +242,19 @@ public void update() {
             if(gp.monster[i].invincible == false){
                 gp.monster[i].life -= 1;
                 gp.monster[i].invincible = true;
-                if(gp.monster[i].life <= 0){
-                    gp.player.currentExp += gp.monster[i].expPoints;
-                    System.out.println("Current exp " + currentExp);
-                    gp.monster[i] = null;
-                }
+                   if(gp.monster[i].life <= 0){
+                System.out.println("Monster defeated! Gaining " + gp.monster[i].expPoints + " EXP.");
+                
+                // Add experience points to the player
+                gp.player.currentExp += gp.monster[i].expPoints;
+                System.out.println("Player's current EXP: " + gp.player.currentExp);
+                
+                // Handle level-up logic (if applicable)
+                checkLevel();
+                
+                // Remove the monster
+                gp.monster[i] = null;
+            }
 
             }
         }
@@ -367,5 +375,16 @@ public void update() {
         g2.drawImage(image, tempScreenX, tempScreenY, null);
 
         
+    }
+
+    public void checkLevel(){
+        int nextLvl = gp.player.currLvl * 3;
+
+        if(gp.player.currentExp >= nextLvl){
+            int remainingExp = gp.player.currentExp - nextLvl;
+            gp.player.currLvl++;
+            gp.player.life = gp.player.maxLife;
+            gp.player.currentExp = remainingExp;
+        }
     }
 }
