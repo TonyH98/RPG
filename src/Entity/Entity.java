@@ -17,6 +17,8 @@ public class Entity {
 
     public int speed; 
 
+    public boolean enemyHitFlag = false;
+
     public boolean invincible = false;
 
     public int invincibleCounter = 0;

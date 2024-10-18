@@ -8,6 +8,8 @@ public class GreenSlime extends Entity{
 
 GamePanel gp;
 
+public boolean enemyHitFlag = false;
+
 public GreenSlime(GamePanel gp){
     super(gp);
 
@@ -28,7 +30,6 @@ public GreenSlime(GamePanel gp){
     strength = 1;
     def = 1;
     type = 2;
-
     getImage();
 }
 

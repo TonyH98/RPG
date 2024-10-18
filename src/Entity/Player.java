@@ -22,8 +22,6 @@ public class Player extends Entity{
     
     public final int screenY;
 
-    public boolean enemyHitFlag = false;
-
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp);
 
@@ -179,7 +177,7 @@ public void update() {
 
     
 
-    public boolean  attacking(){
+    public void attacking(){
         spriteCounter++;
 
         if(spriteCounter <= 5){
@@ -218,12 +216,12 @@ public void update() {
             //Check monster collison with the updated worldX, worldY, and solid Area
             int monsterIndex = gp.checker.checkEntity(this, gp.monster);
             damageMonster(monsterIndex);
-
+            
             worldX = currentWorldX;
             worldY = currentWorldY;
             solidArea.width = solidAreaWidth;
             solidArea.height = solidAreaHeight;
-
+            
         }
         if(spriteCounter > 25){
             spriteNum = 1;
@@ -231,7 +229,7 @@ public void update() {
             attacking = false;
         }
 
-        return attacking;
+        
     }
 
     public void contactMonster(int i){
@@ -250,25 +248,19 @@ public void update() {
                 //Damage Formula
                 int damage = Math.max(1, (int)Math.round(gp.player.strength * 1.2) - (int)Math.round(gp.monster[i].def * 1.2));
 
-                gp.monster[i].life -= damage;
                 enemyHitFlag = true;
+                gp.monster[i].life -= damage;
                 gp.monster[i].invincible = true;
+
                 if(gp.monster[i].life <= 0){
-                System.out.println("Monster defeated! Gaining " + gp.monster[i].expPoints + " EXP.");
+                
                 
                 // Add experience points to the player
                 gp.player.currentExp += gp.monster[i].expPoints;
-                System.out.println("Player's current EXP: " + gp.player.currentExp);
+                
                 
                 // Handle level-up logic (if applicable)
                 checkLevel();
-
-                System.out.println("Player current level: " + gp.player.currLvl);
-
-                System.err.println("Player current Strength " + gp.player.strength);
-
-                System.err.println("Player current Def " + gp.player.def);
-               
 
                 gp.monster[i] = null;
             }

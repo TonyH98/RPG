@@ -54,40 +54,41 @@ public class UI{
 
 
 
-    public void draw(Graphics2D g2) {
-        this.g2 = g2;
-        g2.setFont(ariel_40);
-        g2.setColor(Color.white);
-        // System.out.println("Show Enemy Health " + showEnemyLife);
-        System.out.println("Player hit enemy " + gp.player.enemyHitFlag);
-        if(gp.gameState == gp.titleState){
-            drawTitleScreen();
-        }
-        if(gp.gameState == gp.playState){
-            //Do playState stuff
-            drawPlayerLife();
+   public void draw(Graphics2D g2) {
 
-           if(gp.player.enemyHitFlag == true){
+    this.g2 = g2;
+    g2.setFont(ariel_40);
+    g2.setColor(Color.white);
+    
+    if(gp.gameState == gp.titleState){
+        drawTitleScreen();
+    }
+
+    if(gp.gameState == gp.playState){
+        
+        drawPlayerLife();
+
+        // Check if enemy was hit and show the enemy's health UI
+        
             drawEnemyLife();
-            lastContactTime = System.currentTimeMillis();
-            System.out.println("Time: " + lastContactTime);
-            if(System.currentTimeMillis() - lastContactTime >= 5000){
-                gp.player.enemyHitFlag = false;
-            }
-           }
-        }
-        if(gp.gameState == gp.pauseState){
-            drawPlayerLife();
-            drawPauseScreen();
-        }
-
-        //Dialogue State
-        if(gp.gameState == gp.dialogeState){
-            drawPlayerLife();
-            drawDialogueScreen();
+            lastContactTime = System.currentTimeMillis();  
+        
+        
+        if (System.currentTimeMillis() - lastContactTime > 5000) { 
+            gp.player.enemyHitFlag = false;  
         }
     }
 
+    if(gp.gameState == gp.pauseState){
+        drawPlayerLife();
+        drawPauseScreen();
+    }
+
+    if(gp.gameState == gp.dialogeState){
+        drawPlayerLife();
+        drawDialogueScreen();
+    }
+}
     public void drawPlayerLife(){
         int x = gp.titleSize/2;
         int y = gp.titleSize/2;
@@ -117,11 +118,13 @@ public class UI{
 public void drawEnemyLife(){
     int monsterIndex = gp.checker.checkEntity(gp.player, gp.monster);
     
-    if(monsterIndex != 999) {  // Only draw if a valid monster is detected
-        int x = gp.screenWidth - gp.titleSize;
+    if(monsterIndex != 999 && gp.player.enemyHitFlag == true) {  // Only draw if a valid monster is detected
+        int x = (gp.screenWidth - gp.titleSize) / 2;
+
         int y = gp.titleSize;
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80F));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
+
         g2.setColor(Color.RED);
 
         String monstLife = gp.monster[monsterIndex].life + "/" + gp.monster[monsterIndex].maxLife;
