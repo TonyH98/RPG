@@ -22,6 +22,8 @@ public class Player extends Entity{
     
     public final int screenY;
 
+    public boolean enemyHitFlag = false;
+
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp);
 
@@ -177,7 +179,7 @@ public void update() {
 
     
 
-    public void attacking(){
+    public boolean  attacking(){
         spriteCounter++;
 
         if(spriteCounter <= 5){
@@ -228,6 +230,8 @@ public void update() {
             spriteCounter = 0;
             attacking = false;
         }
+
+        return attacking;
     }
 
     public void contactMonster(int i){
@@ -247,8 +251,9 @@ public void update() {
                 int damage = Math.max(1, (int)Math.round(gp.player.strength * 1.2) - (int)Math.round(gp.monster[i].def * 1.2));
 
                 gp.monster[i].life -= damage;
+                enemyHitFlag = true;
                 gp.monster[i].invincible = true;
-                   if(gp.monster[i].life <= 0){
+                if(gp.monster[i].life <= 0){
                 System.out.println("Monster defeated! Gaining " + gp.monster[i].expPoints + " EXP.");
                 
                 // Add experience points to the player
@@ -272,6 +277,7 @@ public void update() {
         }
         else{
             System.out.print("Miss");
+            enemyHitFlag = false;
         }
     }
 

@@ -10,7 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import object.hearts;
 
-public class UI {
+public class UI{
 
     GamePanel gp;
     Graphics2D g2;
@@ -23,6 +23,9 @@ public class UI {
     public String currentDialogeString = "";
     public int commandNum = 0;
     BufferedImage heart_full, heart_half, heart_blank;
+
+    private long lastContactTime = 0;
+    
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -49,18 +52,29 @@ public class UI {
         }, 3000);
     }
 
+
+
     public void draw(Graphics2D g2) {
         this.g2 = g2;
-        
         g2.setFont(ariel_40);
         g2.setColor(Color.white);
-
+        // System.out.println("Show Enemy Health " + showEnemyLife);
+        System.out.println("Player hit enemy " + gp.player.enemyHitFlag);
         if(gp.gameState == gp.titleState){
             drawTitleScreen();
         }
         if(gp.gameState == gp.playState){
             //Do playState stuff
             drawPlayerLife();
+
+           if(gp.player.enemyHitFlag == true){
+            drawEnemyLife();
+            lastContactTime = System.currentTimeMillis();
+            System.out.println("Time: " + lastContactTime);
+            if(System.currentTimeMillis() - lastContactTime >= 5000){
+                gp.player.enemyHitFlag = false;
+            }
+           }
         }
         if(gp.gameState == gp.pauseState){
             drawPlayerLife();
@@ -99,6 +113,23 @@ public class UI {
             x += gp.titleSize;
         }
     }
+
+public void drawEnemyLife(){
+    int monsterIndex = gp.checker.checkEntity(gp.player, gp.monster);
+    
+    if(monsterIndex != 999) {  // Only draw if a valid monster is detected
+        int x = gp.screenWidth - gp.titleSize;
+        int y = gp.titleSize;
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80F));
+        g2.setColor(Color.RED);
+
+        String monstLife = gp.monster[monsterIndex].life + "/" + gp.monster[monsterIndex].maxLife;
+        g2.drawString(monstLife, x, y);
+    }
+}
+
+
 
 
     public void drawTitleScreen(){
@@ -199,5 +230,7 @@ public class UI {
 
         return x;
     }
+
+   
 }
 
