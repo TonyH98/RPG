@@ -57,7 +57,12 @@ public class Entity {
     int dialogueIndex = 0;
 
     public int maxLife;
+
     public int life;
+
+    public int strength;
+
+    public int def;
 
     public int type;
 

@@ -41,9 +41,7 @@ public class Player extends Entity{
         solidArea.height = 28;
 
         attackArea.width = 36;
-        attackArea.height = 36;
-        currentExp = 0;
-        currLvl = 1; 
+        attackArea.height = 36; 
         setDefaultValues();
         getPlayerImage();
         getPlayerAtkImage();
@@ -59,7 +57,11 @@ public class Player extends Entity{
 
         worldX = gp.titleSize * 23;
         worldY = gp.titleSize * 21;
+        currentExp = 0;
+        currLvl = 1;
         speed = 4;
+        strength = 2;
+        def = 2;
         direction = "down";
         maxLife = 6;
         life = maxLife;
@@ -251,7 +253,12 @@ public void update() {
                 
                 // Handle level-up logic (if applicable)
                 checkLevel();
-                
+
+                System.out.println("Player current level: " + gp.player.currLvl);
+
+                System.err.println("Player current Strength " + gp.player.strength);
+
+                System.err.println("Player current Def " + gp.player.def);
                 // Remove the monster
                 gp.monster[i] = null;
             }
@@ -383,6 +390,9 @@ public void update() {
         if(gp.player.currentExp >= nextLvl){
             int remainingExp = gp.player.currentExp - nextLvl;
             gp.player.currLvl++;
+            gp.player.maxLife++;
+            gp.player.strength += 2;
+            gp.player.def += 2;
             gp.player.life = gp.player.maxLife;
             gp.player.currentExp = remainingExp;
         }
