@@ -126,7 +126,7 @@ public class KeyHandler implements KeyListener {
             objecInteraction = false;
         }
         if(code == KeyEvent.VK_P){
-            projectileK = true;
+            projectileK = false;
         }
 
     }

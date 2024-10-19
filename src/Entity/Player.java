@@ -103,7 +103,7 @@ public void update() {
     }
     else if(projectileAtk){
         projectileAttacking();
-        System.out.println("Length of projectile: " + gp.projectile.length);
+        
     }
     // Only handle movement if not attacking
     else if (isMoving) {
@@ -266,7 +266,8 @@ public void projectileAttacking() {
     }
 
     // Reset after a short delay
-    if (spriteCounter > 25) {
+    if (spriteCounter > 30) {
+        spriteNum = 1;
         spriteCounter = 0;
         gp.projectile[0] = null;
         projectileAtk = false;
@@ -367,7 +368,7 @@ public void projectileAttacking() {
 
         switch(direction){
             case "up":
-            if(attacking == false && projectileAtk == false){
+            if(attacking == false ){
                 if(spriteNum == 1){
                     image = up1;
                 }
@@ -387,7 +388,7 @@ public void projectileAttacking() {
             }
             break;
             case "down":
-           if(attacking == false && projectileAtk == false){
+           if(attacking == false){
                 if(spriteNum == 1){
                     image = down1;
                 }
@@ -405,7 +406,7 @@ public void projectileAttacking() {
             }
                 break;
             case "left":
-            if(attacking == false && projectileAtk == false){
+            if(attacking == false){
                 if(spriteNum == 1){
                     image = left1;
                 }
@@ -424,7 +425,7 @@ public void projectileAttacking() {
             }
                 break;
             case "right":
-            if(attacking == false && projectileAtk == false){
+            if(attacking == false){
                 if(spriteNum == 1){
                     image = right1;
                 }
@@ -447,9 +448,6 @@ public void projectileAttacking() {
 
         g2.drawImage(image, tempScreenX, tempScreenY, null);
 
-        if (gp.projectile[0] != null) {
-        gp.projectile[0].draw(g2);
-        }
     }
 
     public void checkLevel(){
