@@ -3,6 +3,7 @@ package Entity;
 import Main.GamePanel;
 import Main.KeyHandler;
 import Main.UI;
+import Projectile.fireBall;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -99,7 +100,11 @@ public void update() {
     // Check if attacking and handle attack logic
     if (attacking) {
         attacking();  // Handle attack if in attack state
-    } 
+    }
+    else if(projectileAtk){
+        projectileAttacking();
+        System.out.println("Length of projectile: " + gp.projectile.length);
+    }
     // Only handle movement if not attacking
     else if (isMoving) {
         int actualSpeed = speed;
@@ -175,6 +180,10 @@ public void update() {
     if (keyH.objecInteraction && !attacking) {
         attacking = true;
     }
+
+    else if(keyH.projectileK && !attacking){
+        projectileAtk = true;
+    }
 }
 
     
@@ -233,6 +242,37 @@ public void update() {
 
         
     }
+
+public void projectileAttacking() {
+    spriteCounter++;
+
+    // Check if projectile already exists, if not create a new one
+    if (gp.projectile[0] == null) {
+        gp.projectile[0] = new fireBall(gp);
+
+  
+        gp.projectile[0].worldX = this.worldX;
+        gp.projectile[0].worldY = this.worldY;
+        gp.projectile[0].direction = this.direction;
+    }
+
+    // Move and update the projectile
+    gp.projectile[0].setAction();
+
+    int monsterIndex = gp.checker.checkEntity(gp.projectile[0], gp.monster);
+    if (monsterIndex != 999) {
+        damageMonster(monsterIndex);
+        gp.projectile[0] = null;
+    }
+
+    // Reset after a short delay
+    if (spriteCounter > 25) {
+        spriteCounter = 0;
+        gp.projectile[0] = null;
+        projectileAtk = false;
+    }
+}
+
 
     public void contactMonster(int i){
         if(i != 999){
@@ -327,7 +367,7 @@ public void update() {
 
         switch(direction){
             case "up":
-            if(attacking == false){
+            if(attacking == false && projectileAtk == false){
                 if(spriteNum == 1){
                     image = up1;
                 }
@@ -336,7 +376,7 @@ public void update() {
                 }
 
             }
-            if(attacking == true){
+             if(attacking == true ){
                 tempScreenY = screenY - gp.titleSize;
                 if(spriteNum == 1){
                     image = atkU1;
@@ -347,7 +387,7 @@ public void update() {
             }
             break;
             case "down":
-            if(attacking == false){
+           if(attacking == false && projectileAtk == false){
                 if(spriteNum == 1){
                     image = down1;
                 }
@@ -355,7 +395,7 @@ public void update() {
                     image = down2;
                 }
             }
-            if(attacking == true){
+             if(attacking == true ){
                  if(spriteNum == 1){
                     image = atkD1;
                 }
@@ -365,7 +405,7 @@ public void update() {
             }
                 break;
             case "left":
-            if(attacking == false){
+            if(attacking == false && projectileAtk == false){
                 if(spriteNum == 1){
                     image = left1;
                 }
@@ -384,7 +424,7 @@ public void update() {
             }
                 break;
             case "right":
-            if(attacking == false){
+            if(attacking == false && projectileAtk == false){
                 if(spriteNum == 1){
                     image = right1;
                 }
@@ -393,7 +433,7 @@ public void update() {
 
                 }
             }
-            if(attacking == true){
+             if(attacking == true){
                 
                   if(spriteNum == 1){
                     image = atkR1;
@@ -407,7 +447,9 @@ public void update() {
 
         g2.drawImage(image, tempScreenX, tempScreenY, null);
 
-        
+        if (gp.projectile[0] != null) {
+        gp.projectile[0].draw(g2);
+        }
     }
 
     public void checkLevel(){

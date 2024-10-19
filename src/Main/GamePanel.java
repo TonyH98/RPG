@@ -89,7 +89,7 @@ public void setUpGame(){
     assetSetter.setObject();
     assetSetter.setNPC();
     assetSetter.setMonster();
-    
+    assetSetter.setProjectile();
     playMusic(0);
     gameState = titleState;
 }
@@ -158,6 +158,11 @@ public void update(){
                 else if(monster[i].life <= 0 && monster[i].containItem == 2){
                     monster[i] = null;
                 }
+            }
+        }
+     for(int i = 0 ; i < projectile.length; i++){
+            if(projectile[i] != null){
+                projectile[i].update();
             }
         }
     }

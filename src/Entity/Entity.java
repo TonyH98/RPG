@@ -33,6 +33,8 @@ public class Entity {
 
     public BufferedImage atkU1, atkU2, atkD1, atkD2, atkL1, atkL2, atkR1, atkR2;
 
+    public BufferedImage project1;
+
     public Rectangle attackArea = new Rectangle(0 , 0 , 0 , 0);
 
     public String direction = "down";
@@ -71,6 +73,8 @@ public class Entity {
     public int type;
 
     public boolean attacking = false;
+
+    public boolean projectileAtk = false;
 
     public Entity(GamePanel gp){
         this.gp = gp;

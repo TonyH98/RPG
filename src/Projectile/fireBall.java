@@ -26,30 +26,40 @@ public fireBall(GamePanel gp){
 
     solidAreaDefaultY = solidArea.y;
 
-    getImage();
-}
-
-public void getImage(){
     up1 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);
+    up2 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);
+    left1 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);
+    left2 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);
+    right1 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);
+    right2 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);
+    down1 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);
+    down2 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);
+   
 }
 
 
-   public void setAction(){
 
-        if(gp.player.direction == "up"){
-            direction = "up";
-        }
-       if(gp.player.direction == "down"){
-            direction = "down";
-        }
-        if(gp.player.direction == "left"){
-            direction = "left";
-        }
-        if(gp.player.direction == "right"){
-            direction = "right";
-        }
 
+
+public void setAction() {
+    // Move the fireball based on its direction
+    switch (direction) {
+        case "up":
+            worldY -= speed;
+            break;
+        case "down":
+            worldY += speed;
+            break;
+        case "left":
+            worldX -= speed;
+            break;
+        case "right":
+            worldX += speed;
+            break;
     }
+}
+
+
 
 
 }

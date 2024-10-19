@@ -7,7 +7,7 @@ public class KeyHandler implements KeyListener {
 
     GamePanel gp;
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed, sprintPressed, objecInteraction, debugK;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, sprintPressed, objecInteraction, projectileK, debugK;
 
     public KeyHandler(GamePanel gp){
         this.gp = gp;
@@ -69,6 +69,9 @@ public class KeyHandler implements KeyListener {
                 objecInteraction = true;
             }
             if(code == KeyEvent.VK_P){
+                projectileK = true;
+            }
+            if(code == KeyEvent.VK_P){
                 gp.gameState = gp.pauseState;
             }
             if(code == KeyEvent.VK_T){
@@ -121,6 +124,9 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_J){
             objecInteraction = false;
+        }
+        if(code == KeyEvent.VK_P){
+            projectileK = true;
         }
 
     }
