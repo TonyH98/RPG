@@ -15,9 +15,9 @@ public class AssetSetter {
 
     public void setObject(){
 
-       gp.object[0] = new healthDrop(gp);
-       gp.object[0].worldX = gp.titleSize * 20;
-       gp.object[0].worldY = gp.titleSize * 20;
+    //    gp.object[0] = new healthDrop(gp);
+    //    gp.object[0].worldX = gp.titleSize * 20;
+    //    gp.object[0].worldY = gp.titleSize * 20;
 
     }
 
@@ -34,6 +34,15 @@ public class AssetSetter {
         gp.monster[0].worldX = gp.titleSize * 21;
         gp.monster[0].worldY = gp.titleSize * 21;
 
+
+        gp.monster[1] = new GreenSlime(gp);
+        gp.monster[1].worldX = gp.titleSize * 20;
+        gp.monster[1].worldY = gp.titleSize * 20;
+
+        
+    }
+
+    public void setProjectile(){
         
     }
 

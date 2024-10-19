@@ -56,6 +56,8 @@ public Entity npc[] = new Entity[10];
 
 public Entity monster[] = new Entity[20];
 
+public Entity projectile[] = new Entity[2];
+
 public UI ui = new UI(this);
 
 public tileManager tileM = new tileManager(this);
@@ -68,7 +70,7 @@ public AssetSetter assetSetter = new AssetSetter(this);
 
 public Entity object[] = new Entity[10]; //Display only 10 objects at a time;
 
-public int currentObjectIndex = object.length;
+
 
 ArrayList <Entity> entityList = new ArrayList<>();
 
@@ -147,9 +149,7 @@ public void update(){
         for(int i = 0 ; i < monster.length ; i++){
             if(monster[i] != null){
                 monster[i].update();
-
                 
-
                  if(monster[i].life <= 0 && monster[i].containItem == 1) {
                     System.out.println("Monster Index " + monster[i]);
                     assetSetter.dropItem(i);
@@ -208,6 +208,12 @@ public void paintComponent(Graphics g){
          for(int i = 0 ; i < monster.length; i++){
             if(monster[i] != null){
                 entityList.add(monster[i]);
+            }
+        }
+
+        for(int i = 0 ; i < projectile.length; i++){
+            if(projectile[i] != null){
+                entityList.add(projectile[i]);
             }
         }
         

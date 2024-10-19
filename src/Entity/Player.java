@@ -294,7 +294,7 @@ public void update() {
             break;
 
             case "HealthDrop":
-                gp.player.life++;
+                gp.player.life += 1;
                 gp.object[index] = null;
             break;
 
