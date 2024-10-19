@@ -1,6 +1,7 @@
 package Main;
 
 import Monster.GreenSlime;
+import object.healthDrop;
 
 public class AssetSetter {
 
@@ -14,7 +15,9 @@ public class AssetSetter {
 
     public void setObject(){
 
-       
+       gp.object[0] = new healthDrop(gp);
+       gp.object[0].worldX = gp.titleSize * 20;
+       gp.object[0].worldY = gp.titleSize * 20;
 
     }
 
@@ -33,5 +36,19 @@ public class AssetSetter {
 
         
     }
+
+
+ public void dropItem(int monsterIndex) {
+    if (gp.monster[monsterIndex].life <= 0 && gp.monster[monsterIndex].containItem == 1) {
+        for (int i = 0; i < gp.object.length; i++) {
+            if (gp.object[i] == null) { // Check for a free slot
+                gp.object[i] = new healthDrop(gp);
+                gp.object[i].worldX = gp.monster[monsterIndex].worldX;
+                gp.object[i].worldY = gp.monster[monsterIndex].worldY;
+                break; 
+            }
+        }
+    }
+}
 
 }

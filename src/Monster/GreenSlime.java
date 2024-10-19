@@ -8,12 +8,15 @@ public class GreenSlime extends Entity{
 
 GamePanel gp;
 
-public boolean enemyHitFlag = false;
+Random random;
 
 public GreenSlime(GamePanel gp){
     super(gp);
 
     this.gp = gp;
+
+    this.random = new Random();
+    
 
     name = "Green Slime";
     speed = 1;
@@ -30,6 +33,8 @@ public GreenSlime(GamePanel gp){
     strength = 1;
     def = 1;
     type = 2;
+    containItem = this.random.nextInt(2) + 1;
+    System.out.println("Contain Item: " + containItem);
     getImage();
 }
 
@@ -42,6 +47,8 @@ public void getImage(){
     right2 = setUp("/Monsters/greenslime_down_2", gp.titleSize, gp.titleSize);
     down1 = setUp("/Monsters/greenslime_down_1", gp.titleSize, gp.titleSize);
     down2 = setUp("/Monsters/greenslime_down_2", gp.titleSize, gp.titleSize);
+
+    
 }
 
 
@@ -68,5 +75,8 @@ public void setAction(){
             actionLockCounter = 0;
         }
 }
+
+
+
 
 }

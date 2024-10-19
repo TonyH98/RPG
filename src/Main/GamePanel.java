@@ -65,7 +65,10 @@ Sound se = new Sound ();
 
 public AssetSetter assetSetter = new AssetSetter(this);
 
+
 public Entity object[] = new Entity[10]; //Display only 10 objects at a time;
+
+public int currentObjectIndex = object.length;
 
 ArrayList <Entity> entityList = new ArrayList<>();
 
@@ -84,6 +87,7 @@ public void setUpGame(){
     assetSetter.setObject();
     assetSetter.setNPC();
     assetSetter.setMonster();
+    
     playMusic(0);
     gameState = titleState;
 }
@@ -143,6 +147,17 @@ public void update(){
         for(int i = 0 ; i < monster.length ; i++){
             if(monster[i] != null){
                 monster[i].update();
+
+                
+
+                 if(monster[i].life <= 0 && monster[i].containItem == 1) {
+                    System.out.println("Monster Index " + monster[i]);
+                    assetSetter.dropItem(i);
+                    monster[i] = null;
+                }
+                else if(monster[i].life <= 0 && monster[i].containItem == 2){
+                    monster[i] = null;
+                }
             }
         }
     }

@@ -21,6 +21,8 @@ public class Entity {
 
     public boolean invincible = false;
 
+    public int containItem;
+
     public int invincibleCounter = 0;
 
     public int currentExp;

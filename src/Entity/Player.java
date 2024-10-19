@@ -18,6 +18,8 @@ public class Player extends Entity{
 
     KeyHandler keyH;
 
+    private int hashKey;
+
     public final int screenX;
     
     public final int screenY;
@@ -261,8 +263,7 @@ public void update() {
                 
                 // Handle level-up logic (if applicable)
                 checkLevel();
-
-                gp.monster[i] = null;
+                
             }
 
             }
@@ -274,9 +275,31 @@ public void update() {
     }
 
     public void pickUpObject(int index){
-        if(index != 999){
-            
+         if(index != 999){
+        String objectName = gp.object[index].name;
+        switch(objectName){
+            case "Key":
+                hashKey++;
+                gp.object[index] = null;
+                break;
+            case "Door":
+                if (hashKey > 0) {
+                    gp.object[index] = null;
+                    hashKey--;  
+                } else {
+                    gp.ui.showMessage("You need a key to open this door!");
+                }
+                break;
+            case "Chest":
+            break;
+
+            case "HealthDrop":
+                gp.player.life++;
+                gp.object[index] = null;
+            break;
+
         }
+    }
     }
 
     public void interactNPC(int i) {
