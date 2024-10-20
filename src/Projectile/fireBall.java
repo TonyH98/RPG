@@ -26,6 +26,8 @@ public fireBall(GamePanel gp){
 
     solidAreaDefaultY = solidArea.y;
 
+    eleType = "fire";
+
     up1 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);
     up2 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);
     left1 = setUp("/objects/fireBall" , gp.titleSize, gp.titleSize);

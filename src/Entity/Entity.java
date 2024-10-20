@@ -33,7 +33,9 @@ public class Entity {
 
     public BufferedImage atkU1, atkU2, atkD1, atkD2, atkL1, atkL2, atkR1, atkR2;
 
-    public BufferedImage project1;
+    public String eleType;
+
+    public String eleWeakness;
 
     public Rectangle attackArea = new Rectangle(0 , 0 , 0 , 0);
 

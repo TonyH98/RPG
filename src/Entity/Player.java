@@ -226,7 +226,11 @@ public void update() {
 
             //Check monster collison with the updated worldX, worldY, and solid Area
             int monsterIndex = gp.checker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex);
+            if(monsterIndex != 999){
+             int damage = Math.max(1, (int)Math.round(gp.player.strength * 1.2) - (int)Math.round(gp.monster[monsterIndex].def * 1.2));
+            damageMonster(monsterIndex, damage);
+
+            }
             
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -249,8 +253,6 @@ public void projectileAttacking() {
     // Check if projectile already exists, if not create a new one
     if (gp.projectile[0] == null) {
         gp.projectile[0] = new fireBall(gp);
-
-  
         gp.projectile[0].worldX = this.worldX;
         gp.projectile[0].worldY = this.worldY;
         gp.projectile[0].direction = this.direction;
@@ -261,7 +263,15 @@ public void projectileAttacking() {
 
     int monsterIndex = gp.checker.checkEntity(gp.projectile[0], gp.monster);
     if (monsterIndex != 999) {
-        damageMonster(monsterIndex);
+        int damage = Math.max(1, (int)Math.round(gp.player.strength * 1.2) - (int)Math.round(gp.monster[monsterIndex].def * 1.2));
+        if(gp.monster[monsterIndex].eleWeakness == "fire" && gp.projectile[0].eleType == "fire"){
+        damageMonster(monsterIndex, damage + 2);
+        System.out.println("Damage: " + damage + 2);
+        }
+        else{
+            damageMonster(monsterIndex, damage);
+            System.out.println("Damage: " + damage);
+        }
         gp.projectile[0] = null;
     }
 
@@ -284,12 +294,11 @@ public void projectileAttacking() {
         }
     }
 
-    public void damageMonster(int i){
+    public void damageMonster(int i, int damage){
         if(i != 999){
             if(gp.monster[i].invincible == false){
                 
                 //Damage Formula
-                int damage = Math.max(1, (int)Math.round(gp.player.strength * 1.2) - (int)Math.round(gp.monster[i].def * 1.2));
 
                 enemyHitFlag = true;
                 gp.monster[i].life -= damage;

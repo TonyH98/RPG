@@ -19,6 +19,7 @@ public GreenSlime(GamePanel gp){
     
 
     name = "Green Slime";
+    eleWeakness = "fire";
     speed = 1;
     maxLife = 4; 
     life = maxLife;
