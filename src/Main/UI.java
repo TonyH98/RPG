@@ -79,7 +79,7 @@ public class UI{
 
     if(gp.gameState == gp.pauseState){
         drawPlayerLife();
-        drawPauseScreen();
+        drawMenueScreen();
     }
 
     if(gp.gameState == gp.dialogeState){
@@ -197,6 +197,26 @@ public void drawEnemyLife(){
         int y = gp.titleSize / 2;
         int width = gp.screenWidth - (gp.titleSize * 4);
         int height = gp.titleSize * 3;
+
+        drawSubWidnow(x, y, width, height);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28F));
+        x += gp.titleSize;
+        y += gp.titleSize;
+
+        for(String line: currentDialogeString.split("\n")){
+            g2.drawString(line, x , y);
+            y += 40;
+        }
+
+    }
+
+       public void drawMenueScreen(){
+
+        //Window
+        int x = gp.titleSize * 2;;
+        int y = gp.titleSize / 2;
+        int width = gp.screenWidth - (gp.titleSize * 4);
+        int height = gp.titleSize * 8;
 
         drawSubWidnow(x, y, width, height);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28F));
