@@ -180,15 +180,15 @@ public void drawEnemyLife(){
 
 
     }
-    public void drawPauseScreen(){
-        String text = "PAUSED";
+    // public void drawPauseScreen(){
+    //     String text = "PAUSED";
 
-        int x = getXForCenterText(text);
+    //     int x = getXForCenterText(text);
 
-        int y = gp.screenHeight / 2;
+    //     int y = gp.screenHeight / 2;
 
-        g2.drawString(text, x, y);
-    }
+    //     g2.drawString(text, x, y);
+    // }
 
     public void drawDialogueScreen(){
 
@@ -219,14 +219,38 @@ public void drawEnemyLife(){
         int height = gp.titleSize * 8;
 
         drawSubWidnow(x, y, width, height);
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28F));
+       
         x += gp.titleSize;
         y += gp.titleSize;
 
-        for(String line: currentDialogeString.split("\n")){
-            g2.drawString(line, x , y);
-            y += 40;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
+        String text;
+
+        text = "Player Stats";
+        
+        y += gp.titleSize;
+        g2.drawString(text, x, y);
+
+        if(commandNum == 0){
+            g2.drawString(">", x - gp.titleSize, y);
         }
+        text = "Key Items";
+  
+        y += gp.titleSize;
+        g2.drawString(text, x, y);
+
+        if(commandNum == 1){
+            g2.drawString(">", x - gp.titleSize, y);
+        }
+
+        text = "Consumable";
+        y += gp.titleSize;
+        g2.drawString(text, x, y);
+
+        if(commandNum == 2){
+            g2.drawString(">", x - gp.titleSize, y);
+        }
+
 
     }
 
@@ -251,6 +275,7 @@ public void drawEnemyLife(){
 
         return x;
     }
+
 
    
 }
