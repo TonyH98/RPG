@@ -100,7 +100,7 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_S){
                 gp.ui.commandNum++;
-                if(gp.ui.commandNum > 2){
+                if(gp.ui.commandNum > 3){
                     gp.ui.commandNum = 0;
                 }
             }
@@ -114,6 +114,9 @@ public class KeyHandler implements KeyListener {
                 }
                 if(gp.ui.commandNum == 2){
                     
+                }
+                if(gp.ui.commandNum == 3){
+                    gp.gameState = gp.playState;
                 }
             }
         }

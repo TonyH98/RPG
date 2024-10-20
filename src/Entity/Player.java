@@ -25,6 +25,8 @@ public class Player extends Entity{
     
     public final int screenY;
 
+  
+
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp);
 
@@ -460,8 +462,8 @@ public void projectileAttacking() {
     }
 
     public void checkLevel(){
-        int nextLvl = gp.player.currLvl * 3;
-
+        
+     int nextLvl = gp.player.currLvl * 3;
         if(gp.player.currentExp >= nextLvl){
             int remainingExp = gp.player.currentExp - nextLvl;
             gp.player.currLvl++;

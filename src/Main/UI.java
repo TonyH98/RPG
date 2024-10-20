@@ -210,49 +210,95 @@ public void drawEnemyLife(){
 
     }
 
-       public void drawMenueScreen(){
+public void drawMenueScreen(){
 
-        //Window
-        int x = gp.titleSize * 2;;
-        int y = gp.titleSize / 2;
-        int width = gp.screenWidth - (gp.titleSize * 4);
-        int height = gp.titleSize * 8;
+    // Window
+    int x = gp.titleSize * 2;
+    int y = gp.titleSize / 2;
+    int width = gp.screenWidth - (gp.titleSize * 3);
+    int height = gp.titleSize * 8;
 
-        drawSubWidnow(x, y, width, height);
-       
-        x += gp.titleSize;
-        y += gp.titleSize;
+    drawSubWidnow(x, y, width, height);
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
-        String text;
+    // Adjust for vertical line
+    int lineX = x + 250; // Position the line after the menu options
+    int lineYStart = y + gp.titleSize; // Start point for the line (just below the title)
+    int lineYEnd = y + height - gp.titleSize; // End point for the line
 
-        text = "Player Stats";
+    drawLine(lineX, lineYStart, lineX, lineYEnd);
+
+    x += gp.titleSize;
+    y += gp.titleSize;
+
+    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
+    String text;
+
+    text = "Player Stats";
+    g2.drawString(text, x, y);
+
+    // Player sprite
+    if (commandNum == 0) {
+        g2.drawString(">", x - gp.titleSize, y);
         
-        y += gp.titleSize;
-        g2.drawString(text, x, y);
+        // Draw player character sprite
+        int spriteX = (x * 2) + 150;
+        int spriteY = y - 40;
+        g2.drawImage(gp.player.down1, spriteX, spriteY, gp.titleSize + 30, gp.titleSize + 30, null);
 
-        if(commandNum == 0){
-            g2.drawString(">", x - gp.titleSize, y);
-        }
-        text = "Key Items";
-  
-        y += gp.titleSize;
-        g2.drawString(text, x, y);
+        // Draw player life right under the sprite
+        text = "HP :  " + gp.player.life + " / " + gp.player.maxLife;
+        int lifeX = spriteX + 15; // Slightly offset to center the text under the sprite
+        int lifeY = spriteY + gp.titleSize + 60; // Position right under the sprite
+        g2.drawString(text, lifeX, lifeY);
 
-        if(commandNum == 1){
-            g2.drawString(">", x - gp.titleSize, y);
-        }
+        // Additional player stats
+        text = "Strength :  " + gp.player.strength;
+        lifeX = spriteX + 15; 
+        lifeY = spriteY + gp.titleSize + 100; 
+        g2.drawString(text, lifeX, lifeY);
 
-        text = "Consumable";
-        y += gp.titleSize;
-        g2.drawString(text, x, y);
+        text = "Def :  " + gp.player.def;
+        lifeX = spriteX + 15; 
+        lifeY = spriteY + gp.titleSize + 140; 
+        g2.drawString(text, lifeX, lifeY);
 
-        if(commandNum == 2){
-            g2.drawString(">", x - gp.titleSize, y);
-        }
+        text = "Level :  " + gp.player.currLvl;
+        lifeX = spriteX + 15; 
+        lifeY = spriteY + gp.titleSize + 180; 
+        g2.drawString(text, lifeX, lifeY);
 
-
+        text = "Next Level :  " + gp.player.currentExp + " / " + gp.player.currLvl * 3;
+        lifeX = spriteX + 15; 
+        lifeY = spriteY + gp.titleSize + 220; 
+        g2.drawString(text, lifeX, lifeY);
     }
+
+    // Key Items
+    text = "Key Items";
+    y += gp.titleSize;
+    g2.drawString(text, x, y);
+
+    if (commandNum == 1) {
+        g2.drawString(">", x - gp.titleSize, y);
+    }
+
+    // Consumable
+    text = "Consumable";
+    y += gp.titleSize;
+    g2.drawString(text, x, y);
+
+    if (commandNum == 2) {
+        g2.drawString(">", x - gp.titleSize, y);
+    }
+
+      text = "Exist";
+    y += gp.titleSize;
+    g2.drawString(text, x, y);
+
+    if (commandNum == 3) {
+        g2.drawString(">", x - gp.titleSize, y);
+    }
+}
 
     public void drawSubWidnow(int x, int y, int width, int height){
 
@@ -268,6 +314,17 @@ public void drawEnemyLife(){
 
         g2.drawRoundRect(x + 2, y + 2, width - 10, height - 10, 25, 25);
     }
+
+  public void drawLine(int x, int y, int width, int height){
+
+         g2.setColor(Color.white);
+
+        // Draw a straight line (x1, y1) to (x2, y2)
+        g2.drawLine(x , y, width, height); // Example: from (50, 50) to (200, 200)
+
+
+  }
+
 
     public int getXForCenterText(String text){
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
