@@ -71,7 +71,8 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_P){
                 projectileK = true;
             }
-            if(code == KeyEvent.VK_P){
+            if(code == KeyEvent.VK_Q){
+                
                 gp.gameState = gp.pauseState;
             }
             if(code == KeyEvent.VK_T){
@@ -88,7 +89,7 @@ public class KeyHandler implements KeyListener {
 
         //Pause State
         if(gp.gameState == gp.pauseState){
-            if(code == KeyEvent.VK_P){
+            if(code == KeyEvent.VK_ENTER){
                 gp.gameState = gp.playState;
             }
         }

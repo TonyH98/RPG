@@ -229,7 +229,7 @@ public void update() {
             if(monsterIndex != 999){
              int damage = Math.max(1, (int)Math.round(gp.player.strength * 1.2) - (int)Math.round(gp.monster[monsterIndex].def * 1.2));
             damageMonster(monsterIndex, damage);
-
+            System.out.println("Damage: " + damage);
             }
             
             worldX = currentWorldX;

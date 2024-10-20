@@ -67,8 +67,6 @@ public class UI{
     if(gp.gameState == gp.playState){
         
         drawPlayerLife();
-
-        // Check if enemy was hit and show the enemy's health UI
         
             drawEnemyLife();
             lastContactTime = System.currentTimeMillis();  
