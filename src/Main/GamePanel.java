@@ -39,6 +39,7 @@ public final int titleState = 0;
 public final int playState = 1;
 public final int pauseState = 2;
 public final int dialogeState = 3;
+public final int spellMenuState = 4;
 
 
 //fps

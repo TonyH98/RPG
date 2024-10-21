@@ -24,6 +24,7 @@ public class UI{
     public boolean gameFinished = false;
     public String currentDialogeString = "";
     public int commandNum = 0;
+    public int subCommandNum = 0;
     BufferedImage heart_full, heart_half, heart_blank;
     BufferedImage healImage;
     BufferedImage fireImage;
@@ -94,6 +95,10 @@ public class UI{
     if(gp.gameState == gp.dialogeState){
         drawPlayerLife();
         drawDialogueScreen();
+    }
+    if(gp.gameState == gp.spellMenuState){
+        drawPlayerLife();
+        drawMenueScreen();
     }
 }
     public void drawPlayerLife(){
@@ -189,6 +194,7 @@ public void drawEnemyLife(){
 
 
     }
+
     // public void drawPauseScreen(){
     //     String text = "PAUSED";
 
@@ -292,15 +298,31 @@ public void drawMenueScreen(){
     y += gp.titleSize;
     g2.drawString(text, x, y);
 
-    if (commandNum == 1) {
-        g2.drawString(">", x - gp.titleSize, y);
-        int spriteX = (x * 2) + 130;
-        int spriteY = y - 40;
-        g2.drawImage(healImage , spriteX, spriteY, gp.titleSize, gp.titleSize, null);
+if (commandNum == 1) {
+    g2.drawString(">", x - gp.titleSize, y);
+    int spriteX = (x * 2) + 130;
+    int spriteY = y - 40;
 
-        g2.drawImage(fireImage , spriteX + 100, spriteY, gp.titleSize, gp.titleSize, null);
-
+ 
+    // Spell 1: Heal Image
+    if (subCommandNum == 0) {
+        // Draw a white border around the heal image
+        g2.setColor(Color.WHITE);
+        g2.setStroke(new BasicStroke(3)); // Set the border thickness
+        g2.drawRoundRect(spriteX - 5, spriteY - 5, gp.titleSize + 10, gp.titleSize + 10, 15, 15); // Adjust size and corners
     }
+    g2.drawImage(healImage, spriteX, spriteY, gp.titleSize, gp.titleSize, null);
+
+    // Spell 2: Fireball Image
+    if (subCommandNum == 1) {
+        // Draw a white border around the fireball image
+        g2.setColor(Color.WHITE);
+        g2.setStroke(new BasicStroke(3)); // Set the border thickness
+        g2.drawRoundRect(spriteX + 95, spriteY - 5, gp.titleSize + 10, gp.titleSize + 10, 15, 15); // Adjust size and corners
+    }
+    g2.drawImage(fireImage, spriteX + 100, spriteY, gp.titleSize, gp.titleSize, null);
+}
+
 
     // Key Items
     text = "Key Items";

@@ -89,9 +89,6 @@ public class KeyHandler implements KeyListener {
 
         //Pause State
         if(gp.gameState == gp.pauseState){
-            if(code == KeyEvent.VK_ENTER){
-                gp.gameState = gp.playState;
-            }
             if(code == KeyEvent.VK_W){
                 gp.ui.commandNum--;
                 if(gp.ui.commandNum < 0){
@@ -105,18 +102,22 @@ public class KeyHandler implements KeyListener {
                 }
             }
             if(code == KeyEvent.VK_ENTER){
+                System.out.println("Current commandNum: " + gp.ui.commandNum);
                 if(gp.ui.commandNum == 0){
                    
                     
                 }
                 if(gp.ui.commandNum == 1){
-
+                    gp.gameState = gp.spellMenuState;
                 }
                 if(gp.ui.commandNum == 2){
                     
                 }
                 if(gp.ui.commandNum == 3){
-                    gp.gameState = gp.playState;
+                   
+                }
+                if(gp.ui.commandNum == 4){
+                     gp.gameState = gp.playState;
                 }
             }
         }
@@ -127,8 +128,27 @@ public class KeyHandler implements KeyListener {
             }
        }
 
+       if(gp.gameState == gp.spellMenuState){
+
+       if(code == KeyEvent.VK_D){
+                       gp.ui.subCommandNum++;
+                        if(gp.ui.subCommandNum > 1){
+                             gp.ui.subCommandNum = 0;
+                         }
+                     }
+                    if(code == KeyEvent.VK_A){
+                         gp.ui.subCommandNum--;
+                        if(gp.ui.subCommandNum < 0){
+                            gp.ui.subCommandNum = 1;
+                         }
+                     }
+
+       }
+
         
     }
+
+
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -158,6 +178,7 @@ public class KeyHandler implements KeyListener {
         }
 
     }
+
 
 
 
