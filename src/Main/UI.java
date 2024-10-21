@@ -251,25 +251,30 @@ public void drawMenueScreen(){
         int lifeY = spriteY + gp.titleSize + 60; // Position right under the sprite
         g2.drawString(text, lifeX, lifeY);
 
-        // Additional player stats
-        text = "Strength :  " + gp.player.strength;
-        lifeX = spriteX + 15; 
-        lifeY = spriteY + gp.titleSize + 100; 
+        text = "MP :  " + gp.player.mp;
+         lifeX = spriteX + 15; // Slightly offset to center the text under the sprite
+         lifeY = spriteY + gp.titleSize + 100; // Position right under the sprite
         g2.drawString(text, lifeX, lifeY);
 
-        text = "Def :  " + gp.player.def;
+        // Additional player stats
+        text = "Strength :  " + gp.player.strength;
         lifeX = spriteX + 15; 
         lifeY = spriteY + gp.titleSize + 140; 
         g2.drawString(text, lifeX, lifeY);
 
-        text = "Level :  " + gp.player.currLvl;
+        text = "Def :  " + gp.player.def;
         lifeX = spriteX + 15; 
         lifeY = spriteY + gp.titleSize + 180; 
         g2.drawString(text, lifeX, lifeY);
 
-        text = "Next Level :  " + gp.player.currentExp + " / " + gp.player.currLvl * 3;
+        text = "Level :  " + gp.player.currLvl;
         lifeX = spriteX + 15; 
         lifeY = spriteY + gp.titleSize + 220; 
+        g2.drawString(text, lifeX, lifeY);
+
+        text = "Next Level :  " + gp.player.currentExp + " / " + gp.player.currLvl * 3;
+        lifeX = spriteX + 15; 
+        lifeY = spriteY + gp.titleSize + 260; 
         g2.drawString(text, lifeX, lifeY);
     }
 

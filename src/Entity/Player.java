@@ -68,8 +68,10 @@ public class Player extends Entity{
         strength = 2;
         def = 2;
         direction = "down";
+        currSpell = "Fire Ball";
         maxLife = 6;
         life = maxLife;
+        mp = 8;
     }
 
     public void getPlayerImage(){
@@ -252,16 +254,16 @@ public void update() {
 public void projectileAttacking() {
     spriteCounter++;
 
-    // Check if projectile already exists, if not create a new one
-    if (gp.projectile[0] == null) {
+
+    if (gp.projectile[0] == null ){
         gp.projectile[0] = new fireBall(gp);
         gp.projectile[0].worldX = this.worldX;
         gp.projectile[0].worldY = this.worldY;
         gp.projectile[0].direction = this.direction;
+        gp.player.mp -= gp.projectile[0].mp;
     }
 
-    // Move and update the projectile
-    gp.projectile[0].setAction();
+  
 
     int monsterIndex = gp.checker.checkEntity(gp.projectile[0], gp.monster);
     if (monsterIndex != 999) {
@@ -470,6 +472,7 @@ public void projectileAttacking() {
             gp.player.maxLife++;
             gp.player.strength += 2;
             gp.player.def += 2;
+            gp.player.mp += 2;
             gp.player.life = gp.player.maxLife;
             gp.player.currentExp = remainingExp;
         }

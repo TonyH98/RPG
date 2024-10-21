@@ -18,7 +18,9 @@ public fireBall(GamePanel gp){
 
     solidArea.y = 20;
 
-    solidArea.width = 42; 
+    solidArea.width = 42;
+
+    mp = 2; 
 
     solidArea.height = 30;
 

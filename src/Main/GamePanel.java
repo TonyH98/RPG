@@ -137,7 +137,7 @@ public void run(){
 }
 
 public void update(){
-    System.out.println("Current game state:" + gameState);
+   
     if(gameState == playState){
         player.update();
 

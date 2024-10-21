@@ -29,6 +29,10 @@ public class Entity {
 
     public int currLvl;
 
+    public int mp;
+
+    public String currSpell;
+
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
 
     public BufferedImage atkU1, atkU2, atkD1, atkD2, atkL1, atkL2, atkR1, atkR2;
