@@ -1,16 +1,21 @@
 package Main;
 
 import Monster.GreenSlime;
+import java.util.Random;
 import object.healthDrop;
+import object.mpDrop;
+
 
 public class AssetSetter {
 
     GamePanel gp;
 
+    Random random;
+
     public AssetSetter(GamePanel gp){
 
         this.gp = gp;
-
+        this.random = new Random();
     }
 
     public void setObject(){
@@ -47,13 +52,22 @@ public class AssetSetter {
     }
 
 
- public void dropItem(int monsterIndex) {
+public void dropItem(int monsterIndex) {
     if (gp.monster[monsterIndex].life <= 0 && gp.monster[monsterIndex].containItem == 1) {
         for (int i = 0; i < gp.object.length; i++) {
-            if (gp.object[i] == null) { // Check for a free slot
+            if (gp.object[i] == null) { 
+                int checkLife = gp.player.maxLife - gp.player.life;
+                int checkMp = gp.player.maxMp - gp.player.maxMp;
+                String itemName = gp.randomItemDrop[this.random.nextInt(2)];
+                if(itemName.equals("HealthDrop")){
                 gp.object[i] = new healthDrop(gp);
+                }
+                else {
+                gp.object[i] = new mpDrop(gp);
+                }
                 gp.object[i].worldX = gp.monster[monsterIndex].worldX;
                 gp.object[i].worldY = gp.monster[monsterIndex].worldY;
+            
                 break; 
             }
         }

@@ -364,6 +364,10 @@ public void projectileAttacking() {
                 gp.object[index] = null;
             break;
 
+            case "MPDrop":
+                gp.player.mp += 1;
+                gp.object[index] = null;
+            break;
         }
     }
     }

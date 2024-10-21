@@ -58,6 +58,8 @@ public Entity monster[] = new Entity[20];
 
 public Entity projectile[] = new Entity[2];
 
+public String[] randomItemDrop = {"MPDrop", "HealthDrop"};
+
 public UI ui = new UI(this);
 
 public tileManager tileM = new tileManager(this);
