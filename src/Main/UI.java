@@ -1,6 +1,8 @@
 package Main;
 
 import Entity.Entity;
+import Projectile.HealSpell;
+import Projectile.fireBall;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -23,7 +25,8 @@ public class UI{
     public String currentDialogeString = "";
     public int commandNum = 0;
     BufferedImage heart_full, heart_half, heart_blank;
-
+    BufferedImage healImage;
+    BufferedImage fireImage;
     private long lastContactTime = 0;
     
 
@@ -37,6 +40,12 @@ public class UI{
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
+
+        Entity healSpell = new HealSpell(gp);
+        healImage = healSpell.up1;
+
+        Entity fireSpell = new fireBall(gp);
+        fireImage = fireSpell.up1;
     }
 
     public void showMessage(String text) {
@@ -278,12 +287,27 @@ public void drawMenueScreen(){
         g2.drawString(text, lifeX, lifeY);
     }
 
+
+    text = "Spells";
+    y += gp.titleSize;
+    g2.drawString(text, x, y);
+
+    if (commandNum == 1) {
+        g2.drawString(">", x - gp.titleSize, y);
+        int spriteX = (x * 2) + 130;
+        int spriteY = y - 40;
+        g2.drawImage(healImage , spriteX, spriteY, gp.titleSize, gp.titleSize, null);
+
+        g2.drawImage(fireImage , spriteX + 100, spriteY, gp.titleSize, gp.titleSize, null);
+
+    }
+
     // Key Items
     text = "Key Items";
     y += gp.titleSize;
     g2.drawString(text, x, y);
 
-    if (commandNum == 1) {
+    if (commandNum == 2) {
         g2.drawString(">", x - gp.titleSize, y);
     }
 
@@ -292,7 +316,7 @@ public void drawMenueScreen(){
     y += gp.titleSize;
     g2.drawString(text, x, y);
 
-    if (commandNum == 2) {
+    if (commandNum == 3) {
         g2.drawString(">", x - gp.titleSize, y);
     }
 
@@ -300,7 +324,7 @@ public void drawMenueScreen(){
     y += gp.titleSize;
     g2.drawString(text, x, y);
 
-    if (commandNum == 3) {
+    if (commandNum == 4) {
         g2.drawString(">", x - gp.titleSize, y);
     }
 }

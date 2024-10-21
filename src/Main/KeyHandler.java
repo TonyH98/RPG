@@ -100,7 +100,7 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_S){
                 gp.ui.commandNum++;
-                if(gp.ui.commandNum > 3){
+                if(gp.ui.commandNum > 4){
                     gp.ui.commandNum = 0;
                 }
             }
