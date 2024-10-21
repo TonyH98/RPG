@@ -72,6 +72,7 @@ public class Player extends Entity{
         maxLife = 6;
         life = maxLife;
         mp = 8;
+        maxMp = mp;
     }
 
     public void getPlayerImage(){
@@ -252,41 +253,52 @@ public void update() {
     }
 
 public void projectileAttacking() {
-    spriteCounter++;
 
+    // Check if player has enough MP for the spell
+    if(gp.player.currSpell.equals("Fire Ball") && gp.player.mp >= 2) {
+        spriteCounter++;
 
-    if (gp.projectile[0] == null ){
-        gp.projectile[0] = new fireBall(gp);
-        gp.projectile[0].worldX = this.worldX;
-        gp.projectile[0].worldY = this.worldY;
-        gp.projectile[0].direction = this.direction;
-        gp.player.mp -= gp.projectile[0].mp;
-    }
-
-  
-
-    int monsterIndex = gp.checker.checkEntity(gp.projectile[0], gp.monster);
-    if (monsterIndex != 999) {
-        int damage = Math.max(1, (int)Math.round(gp.player.strength * 1.2) - (int)Math.round(gp.monster[monsterIndex].def * 1.2));
-        if(gp.monster[monsterIndex].eleWeakness == "fire" && gp.projectile[0].eleType == "fire"){
-        damageMonster(monsterIndex, damage + 2);
-        System.out.println("Damage: " + damage + 2);
+        // Check if there's already an active projectile
+        if (gp.projectile[0] == null) {
+            // Create the fireball projectile
+            gp.projectile[0] = new fireBall(gp);
+            gp.projectile[0].worldX = this.worldX;
+            gp.projectile[0].worldY = this.worldY;
+            gp.projectile[0].direction = this.direction;
+            gp.player.mp -= gp.projectile[0].mp;  // Deduct MP cost
         }
-        else{
-            damageMonster(monsterIndex, damage);
-            System.out.println("Damage: " + damage);
-        }
-        gp.projectile[0] = null;
-    }
 
-    // Reset after a short delay
-    if (spriteCounter > 30) {
-        spriteNum = 1;
-        spriteCounter = 0;
-        gp.projectile[0] = null;
+        // Check for collision with monsters
+        int monsterIndex = gp.checker.checkEntity(gp.projectile[0], gp.monster);
+        if (monsterIndex != 999) {
+            int damage = Math.max(1, (int) Math.round(gp.player.strength * 1.2) - (int) Math.round(gp.monster[monsterIndex].def * 1.2));
+
+            // Handle elemental weakness for fire spells
+            if (gp.monster[monsterIndex].eleWeakness.equals("fire") && gp.projectile[0].eleType.equals("fire")) {
+                damageMonster(monsterIndex, damage + 2);
+                System.out.println("Damage: " + (damage + 2));
+            } else {
+                damageMonster(monsterIndex, damage);
+                System.out.println("Damage: " + damage);
+            }
+            gp.projectile[0] = null;  // Remove projectile after hitting the monster
+        }
+
+        // Reset projectile attack after a short delay
+        if (spriteCounter > 30) {
+            spriteNum = 1;
+            spriteCounter = 0;
+            gp.projectile[0] = null;
+            projectileAtk = false;
+        }
+    } else {
+        // If MP is less than 2, reset the attack and ensure no projectile is fired
         projectileAtk = false;
+        gp.projectile[0] = null;
+        
     }
 }
+
 
 
     public void contactMonster(int i){
@@ -474,6 +486,7 @@ public void projectileAttacking() {
             gp.player.def += 2;
             gp.player.mp += 2;
             gp.player.life = gp.player.maxLife;
+            gp.player.mp = gp.player.maxMp;
             gp.player.currentExp = remainingExp;
         }
     }
