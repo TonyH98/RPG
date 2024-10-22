@@ -310,6 +310,12 @@ if (commandNum == 1) {
         g2.setColor(Color.WHITE);
         g2.setStroke(new BasicStroke(3)); // Set the border thickness
         g2.drawRoundRect(spriteX - 5, spriteY - 5, gp.titleSize + 10, gp.titleSize + 10, 15, 15); // Adjust size and corners
+
+        text = "A healing spell that restore 1 HP with each use.\n It costs 2 MP to use.";
+        for(String line: text.split("\n")){
+        g2.drawString(line, spriteX -20 , spriteY + 200);
+            
+        }
     }
     g2.drawImage(healImage, spriteX, spriteY, gp.titleSize, gp.titleSize, null);
 
@@ -384,6 +390,12 @@ if (commandNum == 1) {
         return x;
     }
 
+
+    public void descBreak(String text, int maxWidth, int height){
+
+        
+
+    }
 
    
 }

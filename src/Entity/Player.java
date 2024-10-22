@@ -3,6 +3,7 @@ package Entity;
 import Main.GamePanel;
 import Main.KeyHandler;
 import Main.UI;
+import Projectile.HealSpell;
 import Projectile.fireBall;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -25,6 +26,7 @@ public class Player extends Entity{
     
     public final int screenY;
 
+    public int healingMp;
   
 
     public Player(GamePanel gp, KeyHandler keyH){
@@ -50,6 +52,9 @@ public class Player extends Entity{
         setDefaultValues();
         getPlayerImage();
         getPlayerAtkImage();
+        Entity healing = new HealSpell(gp);
+        
+        healingMp = healing.mp;
     }
 
     public void drawCollisionBox(Graphics2D g2) {
@@ -254,6 +259,13 @@ public void update() {
 
 public void projectileAttacking() {
 
+    if(gp.player.currSpell.equals("Healing") && gp.player.mp >= 2){
+        gp.player.life++;
+        gp.player.mp -= healingMp;
+    }
+    else{
+        projectileAtk = false;
+    }
     // Check if player has enough MP for the spell
     if(gp.player.currSpell.equals("Fire Ball") && gp.player.mp >= 2) {
         spriteCounter++;
