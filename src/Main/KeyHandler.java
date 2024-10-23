@@ -142,20 +142,28 @@ public class KeyHandler implements KeyListener {
                     gp.ui.subCommandNum = 1;
                 }
         }
-        if(code == KeyEvent.VK_ENTER){
+        
             if(gp.ui.subCommandNum == 0){
-                gp.player.currSpell = "Healing";
-                System.out.println("Healing Spell Selected");
-                System.out.println("Player current spell:" + gp.player.currSpell);
+                if(code == KeyEvent.VK_SPACE){
+                    gp.player.currSpell = "Healing";
+                    gp.gameState = gp.playState;
+                    System.out.println("Healing Spell Selected");
+                    System.out.println("Player current spell:" + gp.player.currSpell);
+
+                }
                 
             }
             if(gp.ui.subCommandNum == 1){
-                gp.player.currSpell = "Fire Ball";
-                System.out.println("Fire Spell Selected");
-                System.out.println("Player current spell:" + gp.player.currSpell);
+                if(code == KeyEvent.VK_SPACE){
+                    gp.player.currSpell = "Fire Ball";
+                    gp.gameState = gp.playState;
+                    System.out.println("Fire Spell Selected");
+                    System.out.println("Player current spell:" + gp.player.currSpell);
+
+                }
             }
             
-        }
+        
 
        }
 

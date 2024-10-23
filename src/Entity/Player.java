@@ -111,9 +111,12 @@ public void update() {
     if (attacking) {
         attacking();  // Handle attack if in attack state
     }
-    else if(projectileAtk){
-        projectileAttacking();
+    else if(projectileAtk && gp.player.currSpell == "Fire Ball"){
+        fireBall();
         
+    }
+    else if(projectileAtk && gp.player.currSpell == "Healing"){
+        healMethod();
     }
     // Only handle movement if not attacking
     else if (isMoving) {
@@ -257,15 +260,8 @@ public void update() {
         
     }
 
-public void projectileAttacking() {
+public void fireBall() {
 
-    if(gp.player.currSpell.equals("Healing") && gp.player.mp >= 2){
-        gp.player.life++;
-        gp.player.mp -= healingMp;
-    }
-    else{
-        projectileAtk = false;
-    }
     // Check if player has enough MP for the spell
     if(gp.player.currSpell.equals("Fire Ball") && gp.player.mp >= 2) {
         spriteCounter++;
@@ -279,7 +275,7 @@ public void projectileAttacking() {
             gp.projectile[0].direction = this.direction;
             gp.player.mp -= gp.projectile[0].mp;  // Deduct MP cost
         }
-
+        gp.projectile[0].setAction();
         // Check for collision with monsters
         int monsterIndex = gp.checker.checkEntity(gp.projectile[0], gp.monster);
         if (monsterIndex != 999) {
@@ -311,6 +307,16 @@ public void projectileAttacking() {
     }
 }
 
+public void healMethod(){
+    if(gp.player.currSpell.equals("Healing") && gp.player.mp >= 2){
+        gp.player.life++;
+        gp.player.mp -= healingMp;
+    }
+    else{
+        projectileAtk = false;
+    }
+
+}
 
 
     public void contactMonster(int i){

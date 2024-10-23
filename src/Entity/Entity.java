@@ -124,7 +124,7 @@ public class Entity {
         gp.checker.checkTile(this);
         gp.checker.checkObject(this, false);
         gp.checker.checkEntity(this, gp.npc);
-        gp.checker.checkEntity(this, gp.projectile);
+        
         gp.checker.checkEntity(this, gp.monster);
         boolean checkPlayerContact = gp.checker.checkPlayer(this);
 
