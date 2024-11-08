@@ -42,6 +42,11 @@ public final int dialogeState = 3;
 public final int spellMenuState = 4;
 
 
+//Current Map
+public int currMap;
+public final int overWorld = 0;
+public final int dungeon1 = 0;
+
 //fps
 int fps = 60;
 
@@ -95,6 +100,8 @@ public void setUpGame(){
     assetSetter.setProjectile();
     playMusic(0);
     gameState = titleState;
+    currMap = overWorld;
+
 }
 
 public void startGameThread(){

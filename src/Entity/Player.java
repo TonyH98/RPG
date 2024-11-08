@@ -64,7 +64,7 @@ public class Player extends Entity{
     
 
     public void setDefaultValues(){
-
+        gp.currMap = gp.overWorld;
         worldX = gp.titleSize * 23;
         worldY = gp.titleSize * 21;
         currentExp = 0;

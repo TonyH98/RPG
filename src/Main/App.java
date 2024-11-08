@@ -26,4 +26,4 @@ public class App {
        gamePanel.startGameThread(); //Testing
 
     }
-};
+}

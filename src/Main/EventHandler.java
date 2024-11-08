@@ -90,4 +90,8 @@ public class EventHandler {
        
     }
 
+    public void changeMap(){
+        
+    }
+
 }
