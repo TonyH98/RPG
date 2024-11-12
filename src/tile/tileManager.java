@@ -1,15 +1,13 @@
 package tile;
 
-import java.awt.Graphics2D;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import javax.imageio.ImageIO;
-
-
 import Main.GamePanel;
 import Main.UtitltyTool;
+import java.awt.Graphics2D;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import javax.imageio.ImageIO;
 
 public class tileManager {
 
@@ -28,7 +26,15 @@ public tileManager(GamePanel gp){
     mapTileNum = new int [gp.maxWorldCol] [gp.maxWorldRow];
 
     getTitleImage();
-    loadMap("/map/world01.txt");
+
+    if(gp.currMap == gp.overWorld){
+         System.out.println("current map: " + gp.currMap);
+        loadMap("/map/world01.txt");
+    }
+    if(gp.currMap == gp.dungeon1){
+        System.out.println("current map: " + gp.currMap);
+        loadMap("/map/map.txt");
+    }
 }
 
 public void getTitleImage(){

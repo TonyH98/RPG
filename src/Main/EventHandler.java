@@ -39,6 +39,9 @@ public class EventHandler {
         if(hit(23, 12, "up")  == true){
             healingPool(gp.dialogeState);
         }
+        if(hit(20, 20, "up") == true){
+            changeMap(gp.dungeon1);
+        }
 
     }
 
@@ -90,8 +93,18 @@ public class EventHandler {
        
     }
 
-    public void changeMap(){
-        
+  public void changeMap(int map) {
+    gp.currMap = map;
+
+    // Set player's starting position on the new map
+    if (map == gp.dungeon1) {
+        gp.player.worldX = 6;
+        gp.player.worldY = 6;
+    } else if (map == gp.overWorld) {
+        gp.player.worldX = 23;
+        gp.player.worldY = 21;
     }
+}
+
 
 }

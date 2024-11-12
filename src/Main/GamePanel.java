@@ -45,7 +45,7 @@ public final int spellMenuState = 4;
 //Current Map
 public int currMap;
 public final int overWorld = 0;
-public final int dungeon1 = 0;
+public final int dungeon1 = 1;
 
 //fps
 int fps = 60;
