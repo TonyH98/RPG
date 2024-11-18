@@ -1,6 +1,5 @@
 package Main;
 
-import Monster.GreenSlime;
 import java.util.Random;
 import object.healthDrop;
 import object.mpDrop;
@@ -36,14 +35,14 @@ public class AssetSetter {
 
 
     public void setMonster(){
-        gp.monster[0] = new GreenSlime(gp);
-        gp.monster[0].worldX = gp.titleSize * 21;
-        gp.monster[0].worldY = gp.titleSize * 21;
+        // gp.monster[0] = new GreenSlime(gp);
+        // gp.monster[0].worldX = gp.titleSize * 21;
+        // gp.monster[0].worldY = gp.titleSize * 21;
 
 
-        gp.monster[1] = new GreenSlime(gp);
-        gp.monster[1].worldX = gp.titleSize * 20;
-        gp.monster[1].worldY = gp.titleSize * 20;
+        // gp.monster[1] = new GreenSlime(gp);
+        // gp.monster[1].worldX = gp.titleSize * 20;
+        // gp.monster[1].worldY = gp.titleSize * 20;
 
         
     }

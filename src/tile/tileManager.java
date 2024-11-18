@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class tileManager {
@@ -27,14 +28,17 @@ public tileManager(GamePanel gp){
 
     getTitleImage();
 
-    if(gp.currMap == gp.overWorld){
-         System.out.println("current map: " + gp.currMap);
+ 
+    
+
+    if(gp.currMap == 0){
         loadMap("/map/world01.txt");
     }
-    if(gp.currMap == gp.dungeon1){
-        System.out.println("current map: " + gp.currMap);
+    if(gp.currMap == 1){
         loadMap("/map/map.txt");
+
     }
+    
 }
 
 public void getTitleImage(){
@@ -70,40 +74,37 @@ public void setUp(int index, String imagePath, boolean collison){
 
 }
 
-public void loadMap(String map){
-    try{
+public void loadMap(String map) {
+    try {
+        InputStream is = getClass().getResourceAsStream(map);
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-        InputStream is = getClass().getResourceAsStream(map); //Grabbing the text file
+        // Count the rows and columns in the map file
+        ArrayList<String> lines = new ArrayList<>();
+        String line;
+        while ((line = br.readLine()) != null) {
+            lines.add(line);
+        }
+        gp.maxWorldRow = lines.size();
+        gp.maxWorldCol = lines.get(0).split(" ").length;
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(is)); //Reading the text file
+        // Initialize mapTileNum with the correct dimensions
+        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
-        int col = 0; //represent the col within the text file
-        int row = 0; //represents the row within the text file
-
-        while(col < gp.maxWorldCol && row < gp.maxWorldRow){ //Will stop once it reaches the maximum as there will no value to read 
-
-            String line = br.readLine();
-
-            while(col < gp.maxWorldCol){
-                String numbers[] = line.split(" ");
-
-                int num = Integer.parseInt(numbers[col]);
-
-                mapTileNum[col][row] = num;
-                col++;
-            }
-            if(col == gp.maxWorldCol){
-                col = 0;
-                row++;
+        // Parse the map data
+        for (int row = 0; row < gp.maxWorldRow; row++) {
+            String[] numbers = lines.get(row).split(" ");
+            for (int col = 0; col < gp.maxWorldCol; col++) {
+                mapTileNum[col][row] = Integer.parseInt(numbers[col]);
             }
         }
 
         br.close();
-    }
-    catch(Exception e){
-
+    } catch (Exception e) {
+        e.printStackTrace();
     }
 }
+
 
 public void draw(Graphics2D g2){
     

@@ -28,8 +28,8 @@ public final int screenWidth = titleSize * maxScreenCol; //768 pixels
 public final int screenHeight = titleSize * maxScreenRow; // 576 pixels;
 
 //World Settings
-public final int maxWorldCol = 50;
-public final int maxWorldRow = 50;
+public int maxWorldCol;
+public int maxWorldRow;
 public final int worldWidth = titleSize * maxWorldCol;
 public final int worldHeight = titleSize * maxScreenRow;
 
