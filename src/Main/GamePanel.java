@@ -10,6 +10,8 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 import tile.tileManager;
+import java.util.Map;
+import java.util.List;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -47,6 +49,8 @@ public int currMap;
 public final int overWorld = 0;
 public final int dungeon1 = 1;
 
+//Item hashmap
+
 //fps
 int fps = 60;
 
@@ -77,6 +81,7 @@ public AssetSetter assetSetter = new AssetSetter(this);
 
 
 public Entity object[] = new Entity[10]; //Display only 10 objects at a time;
+
 
 
 

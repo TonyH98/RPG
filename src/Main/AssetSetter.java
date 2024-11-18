@@ -23,7 +23,7 @@ public class AssetSetter {
        gp.object[0] = new stairs(gp);
        gp.object[0].worldX = gp.titleSize * 20;
        gp.object[0].worldY = gp.titleSize * 20;
-
+       
     }
 
     public void setNPC(){
