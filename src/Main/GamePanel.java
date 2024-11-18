@@ -9,9 +9,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
+import java.util.HashMap;
 import tile.tileManager;
-import java.util.Map;
-import java.util.List;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -30,8 +29,8 @@ public final int screenWidth = titleSize * maxScreenCol; //768 pixels
 public final int screenHeight = titleSize * maxScreenRow; // 576 pixels;
 
 //World Settings
-public int maxWorldCol;
-public int maxWorldRow;
+public  int maxWorldCol;
+public  int maxWorldRow;
 public final int worldWidth = titleSize * maxWorldCol;
 public final int worldHeight = titleSize * maxScreenRow;
 
@@ -48,8 +47,6 @@ public final int spellMenuState = 4;
 public int currMap;
 public final int overWorld = 0;
 public final int dungeon1 = 1;
-
-//Item hashmap
 
 //fps
 int fps = 60;
@@ -84,8 +81,9 @@ public Entity object[] = new Entity[10]; //Display only 10 objects at a time;
 
 
 
-
 ArrayList <Entity> entityList = new ArrayList<>();
+
+public  HashMap <String, Entity> mapObject = new HashMap<>();
 
 public EventHandler eHandler = new EventHandler(this);
 

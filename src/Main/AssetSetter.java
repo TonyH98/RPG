@@ -3,7 +3,6 @@ package Main;
 import java.util.Random;
 import object.healthDrop;
 import object.mpDrop;
-import object.stairs;
 
 
 public class AssetSetter {
@@ -20,9 +19,7 @@ public class AssetSetter {
 
     public void setObject(){
 
-       gp.object[0] = new stairs(gp);
-       gp.object[0].worldX = gp.titleSize * 20;
-       gp.object[0].worldY = gp.titleSize * 20;
+
        
     }
 
